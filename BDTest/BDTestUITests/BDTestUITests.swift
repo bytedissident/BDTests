@@ -28,12 +28,27 @@ class BDTestUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testExample_string() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let bdTests = BDTestsMain(enviornmentName: nil)
         _ = bdTests.createTest(jsonString: "{\"key\":\"value\"}", jsonFile: nil, httpCode: 200)
+        
+        
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Submit"].tap()
+        sleep(1)
+        XCTAssertEqual(app.staticTexts["value-label"].label , "value")
+    }
+    
+    func testExample_file() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let bdTests = BDTestsMain(enviornmentName: nil)
+        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
         
         
         let app = XCUIApplication()

@@ -35,19 +35,17 @@ class BDTestsMain  {
         
         //DID WE PASS A STRING
         if jsonString != nil {
-            created = self.setClipboard(json: jsonString!)
+            let json = "{\"code\":\(httpResponseCode),\"data\":\(jsonString!)}"
+            created = self.setClipboard(json: json)
             assert(created)
         }
         
         //DID WE PASS A FILE URL
         if jsonFile != nil {
             
-            //get JSON string
-            guard let parsedString = self.openFileAndReadIntoString(urlString: jsonFile!) else {
-                return created
-            }
             //set clipboard data
-            created = self.setClipboard(json: parsedString)
+            let json = "{\"code\":\(httpResponseCode),\"data-file\":\"\(jsonFile!)\"}"
+            created = self.setClipboard(json: json)
             assert(created)
         }
         //return success message
@@ -123,14 +121,46 @@ class BDTestsMain  {
         return nil
     }
     
+    
+    /*
+     DETERMINE RESOPNSE TEXT
+    */
+    func determineResponseText(dict:[String:Any])->String?{
+        
+        if dict["data"] != nil {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: dict["data"]!, options: .prettyPrinted)
+                // here "jsonData" is the dictionary encoded in JSON data
+                let response = String.init(data: jsonData, encoding: .utf8)
+                guard let responseText = response else { assert(false); return nil}
+                return responseText
+            }catch _ as NSError{
+                assert(false);
+                return nil
+            }
+        }
+        
+        if dict["data-file"] as? String != nil {
+            
+            guard let responseText = self.openFileAndReadIntoString(urlString: dict["data-file"]! as! String) else { assert(false); return nil }
+            
+            return responseText
+        }
+        assert(false);
+        return nil
+    }
+    
     /*
     STUB NETWORK
     */
     func stubNetwork(){
         
-        guard let responseText = self.readClipboard() else { return }
+        guard let json = self.readClipboard() else { assert(false); return }
+        guard let dict = self.convertToDictionary(text: json) else { assert(false); return }
+        guard let responseText = self.determineResponseText(dict:dict) else { assert(false); return }
+        guard let httpCode = dict["code"] else { assert(false); return }
+        guard let code =  httpCode as? Int32 else { assert(false); return }
         
-        let code = self.httpResponseCode
         stub(condition: isMethodGET()) { request -> OHHTTPStubsResponse in
             let stubData = responseText.data(using: String.Encoding.utf8)
             return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
@@ -140,7 +170,6 @@ class BDTestsMain  {
             let stubData = responseText.data(using: String.Encoding.utf8)
             return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
         }
-        
         
         stub(condition: isMethodPUT()) { request -> OHHTTPStubsResponse in
             let stubData = responseText.data(using: String.Encoding.utf8)
@@ -157,6 +186,7 @@ class BDTestsMain  {
             return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
         }
     }
+    
     /**
      REMOVE STUBS
     */

@@ -78,7 +78,7 @@ class BDTestTests: XCTestCase {
         
         let read = sut.readClipboard()
         if let clippedText = read {
-            XCTAssertEqual(clippedText, "{\"key\":\"value\"}")
+            XCTAssertEqual(clippedText, "{\"code\":400,\"data\":{\"key\":\"value\"}}")
         }else{
             XCTFail()
         }
@@ -93,7 +93,7 @@ class BDTestTests: XCTestCase {
         
         let read = sut.readClipboard()
         if let clippedText = read {
-            XCTAssertEqual(clippedText.trimmingCharacters(in: .whitespacesAndNewlines), "value")
+            XCTAssert(clippedText.trimmingCharacters(in: .whitespacesAndNewlines).contains("\"data\":data"))
         }else{
             XCTFail()
         }
@@ -115,7 +115,36 @@ class BDTestTests: XCTestCase {
         XCTAssertFalse(sut.isTest())
         
         //TEST
-        _ = sut.createTest(jsonString: "value", jsonFile: nil, httpCode: 200)
+        _ = sut.createTest(jsonString: "value", jsonFile: nil, httpCode: 400)
         XCTAssert(sut.isTest())
+
+    }
+    
+    func testStubNetwork(){
+        
+        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
+        XCTAssert(test)
+        
+        sut.stubNetwork()
+    }
+    
+    func testDetermineResponseText_string(){
+        
+        _ = sut.createTest(jsonString: "{}" , jsonFile: nil, httpCode: 400)
+        let clip = sut.readClipboard()
+        let dict = sut.convertToDictionary(text: clip!)
+        let responseText = sut.determineResponseText(dict: dict!)
+        
+        XCTAssertEqual(responseText?.trimmingCharacters(in: .whitespacesAndNewlines), "{\n\n}")
+    }
+    
+    func testDetermineResponseText_file(){
+        
+        _ = sut.createTest(jsonString: nil , jsonFile: "test_local_json", httpCode: 400)
+        guard let clip = sut.readClipboard() else { XCTFail(); return }
+        guard let dict = sut.convertToDictionary(text: clip) else { XCTFail(); return}
+        let responseText = sut.determineResponseText(dict: dict)
+        
+        XCTAssertEqual(responseText?.trimmingCharacters(in: .whitespacesAndNewlines), "{\"key\":\"value\"}")
     }
 }
