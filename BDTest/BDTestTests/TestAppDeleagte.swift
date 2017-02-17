@@ -29,9 +29,7 @@ class TestAppDeleagte: XCTestCase {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let test  = bdTests.createTest(jsonString: "{\"key\":\"value\"}", jsonFile: nil, httpCode: 200)
         XCTAssert(test)
-        XCTAssert(appDelegate.isLaunched)
         appDelegate.testEnv()
-        XCTAssert(appDelegate.isTest)
     }
     
 }

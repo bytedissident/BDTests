@@ -33,10 +33,24 @@ class TestBDTestsRealm: XCTestCase {
         //realmTests["test-object"] = BDTestRealmObject()
         
         let json = ["name":"test"]
-        realmTests.mapAndSaveObject(data: json, obj: BDTestRealmObject())
+        realmTests.mapAndSaveObject(data: json, obj: BDTestRealmObject(),update:false)
         
         guard let realm = BDTestsRealm().setUpRealm() else { XCTFail(); return }
         let testObjects = realm.objects(BDTestRealmObject.self).last
         XCTAssertEqual(testObjects?.name, "test")
+    }
+    
+    func testJSONTORealm(){
+    
+        BDTestsRealm().deleteAll()
+        let realmTests = BDTestsRealm()
+        //realmTests["test-object"] = BDTestRealmObject()
+        
+        let json = "{\"name\":\"test json\"}"
+        let toRealm = realmTests.jsonToRealm(json: json, obj: BDTestRealmObject(),update:false)
+        XCTAssert(toRealm)
+        guard let realm = BDTestsRealm().setUpRealm() else { XCTFail(); return }
+        let testObjects = realm.objects(BDTestRealmObject.self).last
+        XCTAssertEqual(testObjects?.name, "test json")
     }
 }
