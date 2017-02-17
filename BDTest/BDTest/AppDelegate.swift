@@ -12,14 +12,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var testResults = ""
-    var isTest = false
-    var isLaunched = false
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        self.isLaunched = true
+        self.setUpDataTests()
         self.testEnv()
         return true
     }
@@ -29,8 +26,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let bdTests = BDTestsMain(enviornmentName: nil)
         assert(bdTests.enviornmentName == "BD-UI-TEST")
         if bdTests.isTest() {
-            self.isTest = true
-            bdTests.stubNetwork()
+            let test = bdTests.runTests()
+            assert(test)
+        }
+    }
+    
+    func setUpDataTests(){
+        let bdTests = BDTestsMain(enviornmentName: nil)
+        if bdTests.isModelTest(){
+            
+            guard let modelData = bdTests.readDatabaseData() else { assert(false); return }
+            
+            if modelData["data-object"] != nil {
+                let obj = BDTestRealmObject()
+                obj.name = "Test Name"
+                BDTestsRealm().save(item: obj)
+            }
         }
     }
 

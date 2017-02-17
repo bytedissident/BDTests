@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Alamofire
 
 @testable import BDTest
 
@@ -120,12 +121,14 @@ class BDTestTests: XCTestCase {
 
     }
     
-    func testStubNetwork(){
+    func testRunTests_network(){
         
-        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
+        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 200)
         XCTAssert(test)
         
-        sut.stubNetwork()
+        let run = sut.runTests()
+        XCTAssert(run)
+
     }
     
     func testDetermineResponseText_string(){
@@ -146,5 +149,47 @@ class BDTestTests: XCTestCase {
         let responseText = sut.determineResponseText(dict: dict)
         
         XCTAssertEqual(responseText?.trimmingCharacters(in: .whitespacesAndNewlines), "{\"key\":\"value\"}")
+    }
+    
+    
+    
+    func testSeedDatabase(){
+        
+        let json = "{\"key\":\"value\"}"
+        let modelData = sut.seedDatabase(json: json)
+        XCTAssert(modelData)
+        
+        let  readPaste = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName+"-model"), create: false)
+        if let myString = readPaste?.string {
+            XCTAssertEqual(myString, "{\"key\":\"value\"}")
+        }else{
+            XCTFail()
+        }
+    }
+    
+    func testReadDatabaseData(){
+        
+        let json = "{\"key\":\"value\"}"
+        let modelData = sut.seedDatabase(json: json)
+        XCTAssert(modelData)
+        
+        guard let  db = sut.readDatabaseData() else { XCTFail(); return }
+        XCTAssertEqual(db["key"] as? String, "value")
+    }
+    
+    func testIsModelTest_false(){
+        //SET UP
+        UIPasteboard.remove(withName: UIPasteboardName(rawValue: sut.enviornmentName+"-model"))
+        XCTAssertFalse(sut.isModelTest())
+    }
+    
+    func testIsModelTest_true(){
+        //SET UP
+        UIPasteboard.remove(withName: UIPasteboardName(rawValue: sut.enviornmentName+"-model"))
+        XCTAssertFalse(sut.isModelTest())
+        
+        //TEST
+        _ = sut.seedDatabase(json: "test-data")
+        XCTAssert(sut.isModelTest())
     }
 }

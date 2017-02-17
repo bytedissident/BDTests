@@ -8,6 +8,7 @@
 
 import UIKit
 import OHHTTPStubs
+import Alamofire
 
 class BDTestsMain  {
     
@@ -51,6 +52,34 @@ class BDTestsMain  {
         //return success message
         return created
     }
+    
+    /*
+     seed database
+    */
+    func seedDatabase(json:String)->Bool{
+        
+        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
+        paste?.string = ""
+        paste?.string = json
+        
+        if paste == nil { return false }
+        return true
+    }
+    
+    /**
+     read database data
+    */
+    func readDatabaseData()->[String:Any]?{
+    
+        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
+        if paste == nil { return nil }
+        
+        guard let json = paste?.string else { return nil }
+        guard let dict = self.convertToDictionary(text: json) else { return nil }
+        
+        return dict
+    }
+    
     
     func removeTest(){
         self.removeStubs()
@@ -153,13 +182,13 @@ class BDTestsMain  {
     /*
     STUB NETWORK
     */
-    func stubNetwork(){
+    func runTests()->Bool{
         
-        guard let json = self.readClipboard() else { assert(false); return }
-        guard let dict = self.convertToDictionary(text: json) else { assert(false); return }
-        guard let responseText = self.determineResponseText(dict:dict) else { assert(false); return }
-        guard let httpCode = dict["code"] else { assert(false); return }
-        guard let code =  httpCode as? Int32 else { assert(false); return }
+        guard let json = self.readClipboard() else { assert(false); return false }
+        guard let dict = self.convertToDictionary(text: json) else { assert(false); return false }
+        guard let responseText = self.determineResponseText(dict:dict) else { assert(false); return false }
+        guard let httpCode = dict["code"] else { assert(false); return false }
+        guard let code =  httpCode as? Int32 else { assert(false); return false }
         
         stub(condition: isMethodGET()) { request -> OHHTTPStubsResponse in
             let stubData = responseText.data(using: String.Encoding.utf8)
@@ -185,6 +214,8 @@ class BDTestsMain  {
             let stubData = responseText.data(using: String.Encoding.utf8)
             return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
         }
+        
+        return true
     }
     
     /**
@@ -202,6 +233,20 @@ class BDTestsMain  {
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: false)
         if paste?.string != nil {
         
+            return true
+        }
+        return false
+    }
+    
+    
+    /*
+    HAS MODEL TEST
+     */
+    func isModelTest()->Bool{
+        
+        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: false)
+        if paste?.string != nil {
+            
             return true
         }
         return false

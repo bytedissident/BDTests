@@ -57,4 +57,20 @@ class BDTestUITests: XCTestCase {
         sleep(1)
         XCTAssertEqual(app.staticTexts["value-label"].label , "value")
     }
+    
+    func testExample_model_data() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let bdTests = BDTestsMain(enviornmentName: nil)
+        //_ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
+        let model = bdTests.seedDatabase(json: "{\"data-object\":\"model value\"}")
+        XCTAssert(model)
+        
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Submit"].tap()
+        sleep(1)
+        XCTAssertEqual(app.staticTexts["model-data"].label , "Test Name")
+    }
 }

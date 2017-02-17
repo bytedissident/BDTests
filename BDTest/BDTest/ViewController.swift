@@ -8,10 +8,12 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var modelDataLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,7 @@ class ViewController: UIViewController {
     @IBAction func submitData(_ sender: Any) {
         self.makeApiCall()
     }
+    
     func makeApiCall(){
     
           self.valueLabel.text = "TRY"
@@ -44,6 +47,12 @@ class ViewController: UIViewController {
             }
         }
     
+        let realm = try! Realm()
+        let obj = realm.objects(BDTestRealmObject.self).last
+        if let name = obj?.name {
+            self.modelDataLabel.text = name
+            self.modelDataLabel.accessibilityLabel = name
+        }
     }
 }
 
