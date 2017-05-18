@@ -16,13 +16,74 @@ class BDTestTests: XCTestCase {
     var sut:BDTestsMain!
     override func setUp() {
         super.setUp()
-        self.sut = BDTestsMain(enviornmentName: nil)
+        
+         self.sut = BDTestsMain(enviornmentName: nil)
+    
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
         self.sut = nil
         super.tearDown()
+    }
+    
+    func testCreateTest_jsonString(){
+        
+        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
+        XCTAssert(test)
+        
+        let read = sut.readClipboard()
+        if let clippedText = read {
+            XCTAssertEqual(clippedText, "{\"code\":400,\"data\":{\"key\":\"value\"}}")
+        }else{
+            XCTFail()
+        }
+        
+        XCTAssertEqual(sut.httpResponseCode, 400)
+    }
+    
+    func testCreateTest_jsonFile(){
+        
+        let test = sut.createTest(jsonString:nil , jsonFile:"test_data", httpCode: 400)
+        XCTAssert(test)
+        
+        let read = sut.readClipboard()
+        if let clippedText = read {
+            XCTAssertEqual(clippedText, "{\"code\":400,\"data-file\":\"test_data\"}")
+        }else{
+            XCTFail()
+        }
+        
+        XCTAssertEqual(sut.httpResponseCode, 400)
+    }
+    
+    func testSeedDatabase(){
+        
+        //CLEAR
+        let paste = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName+"-model"), create: true)
+        paste?.string = ""
+        
+       let seeded =  sut.seedDatabase(json: "JSON-STRING")
+        XCTAssert(seeded)
+        
+        let read = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName+"-model"), create: true)
+         XCTAssertEqual(read?.string, "JSON-STRING")
+        //sut.se
+    }
+    
+    func testReadDatabase(){
+        
+        //CLEAR
+        let paste = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName+"-model"), create: true)
+        paste?.string = ""
+        
+        let seeded =  sut.seedDatabase(json: "{\"key\":\"value\"}")
+        XCTAssert(seeded)
+        
+        let read = sut.readDatabaseData()
+        XCTAssertEqual(read?["key"] as! String, "value")
+        //sut.se
     }
     
     func testSetClipboard(){
@@ -58,6 +119,9 @@ class BDTestTests: XCTestCase {
         }else{
             XCTFail()
         }
+        //CLIPBOARD SHOULD BE CLEAR AFTER READ
+        let readAgain = sut.readClipboard()
+        XCTAssertNil(readAgain)
     }
     
     func testConvertToDictionary(){
@@ -71,36 +135,7 @@ class BDTestTests: XCTestCase {
         let dict = sut.convertToDictionary(text: parsedString)
         XCTAssertEqual(dict?["key"] as! String,"value")
      }
-    
-    func testCreateTest_json_string(){
-        
-        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
-        XCTAssert(test)
-        
-        let read = sut.readClipboard()
-        if let clippedText = read {
-            XCTAssertEqual(clippedText, "{\"code\":400,\"data\":{\"key\":\"value\"}}")
-        }else{
-            XCTFail()
-        }
-        
-        XCTAssertEqual(sut.httpResponseCode, 400)
-    }
-    
-    func testCreateTest_json_file(){
-        
-        let test = sut.createTest(jsonString:nil , jsonFile:"test_data", httpCode: 400)
-        XCTAssert(test)
-        
-        let read = sut.readClipboard()
-        if let clippedText = read {
-            XCTAssert(clippedText.trimmingCharacters(in: .whitespacesAndNewlines).contains("\"data\":data"))
-        }else{
-            XCTFail()
-        }
-        
-        XCTAssertEqual(sut.httpResponseCode, 400)
-    }
+
     
     func testIsTest_false(){
         //SET UP
@@ -153,7 +188,7 @@ class BDTestTests: XCTestCase {
     
     
     
-    func testSeedDatabase(){
+    func testSeedDatabase_(){
         
         let json = "{\"key\":\"value\"}"
         let modelData = sut.seedDatabase(json: json)
@@ -175,6 +210,11 @@ class BDTestTests: XCTestCase {
         
         guard let  db = sut.readDatabaseData() else { XCTFail(); return }
         XCTAssertEqual(db["key"] as? String, "value")
+        
+        let  db2 = sut.readDatabaseData()
+        XCTAssertNil(db2)
+        
+        
     }
     
     func testIsModelTest_false(){

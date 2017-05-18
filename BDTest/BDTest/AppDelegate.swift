@@ -35,7 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let bdTests = BDTestsMain(enviornmentName: nil)
         if bdTests.isModelTest(){
             
-            guard let modelData = bdTests.readDatabaseData() else { assert(false); return }
+            guard let modelData = bdTests.readDatabaseData() else { //assert(false); 
+                return }
             
             if modelData["data-object"] != nil {
                 let obj = BDTestRealmObject()

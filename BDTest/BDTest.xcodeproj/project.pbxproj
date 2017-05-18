@@ -8,16 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		1A45853AE3A043544AA053B4 /* Pods_BDTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF67AC7837E301611654569B /* Pods_BDTest.framework */; };
+		8720D20B1ECDFD64005C0F2D /* BDUITestsBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8720D20A1ECDFD64005C0F2D /* BDUITestsBase.swift */; };
+		8720D20D1ECE0EA6005C0F2D /* BDTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8720D20C1ECE0EA6005C0F2D /* BDTestUITests.swift */; };
+		8720D20E1ECE0F5A005C0F2D /* BDTestsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35D101E55C47D004A792F /* BDTestsMain.swift */; };
 		87D35CE21E55C3D5004A792F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35CE11E55C3D5004A792F /* AppDelegate.swift */; };
 		87D35CE41E55C3D5004A792F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35CE31E55C3D5004A792F /* ViewController.swift */; };
 		87D35CE71E55C3D5004A792F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87D35CE51E55C3D5004A792F /* Main.storyboard */; };
 		87D35CE91E55C3D5004A792F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87D35CE81E55C3D5004A792F /* Assets.xcassets */; };
 		87D35CEC1E55C3D5004A792F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87D35CEA1E55C3D5004A792F /* LaunchScreen.storyboard */; };
 		87D35CF71E55C3D5004A792F /* BDTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35CF61E55C3D5004A792F /* BDTestTests.swift */; };
-		87D35D021E55C3D5004A792F /* BDTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35D011E55C3D5004A792F /* BDTestUITests.swift */; };
 		87D35D111E55C47D004A792F /* BDTestsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35D101E55C47D004A792F /* BDTestsMain.swift */; };
 		87D35D131E55E35B004A792F /* test_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 87D35D121E55E35B004A792F /* test_data.json */; };
-		87D35D171E56042C004A792F /* BDTestsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35D161E56042C004A792F /* BDTestsMain.swift */; };
 		87D35D191E5605B2004A792F /* TestAppDeleagte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35D181E5605B2004A792F /* TestAppDeleagte.swift */; };
 		87D35D211E562611004A792F /* test_local_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 87D35D201E562611004A792F /* test_local_json.json */; };
 		87D35D261E565329004A792F /* BDTestsRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D35D251E565329004A792F /* BDTestsRealm.swift */; };
@@ -50,6 +51,8 @@
 		2EED327437ABF2B997726400 /* Pods-BDTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestUITests/Pods-BDTestUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4B60D47F1A7E662B3BADDB8A /* Pods-BDTestUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestUITests/Pods-BDTestUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		581D2FF348E7AAEA62BBBFDE /* Pods_BDTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8720D20A1ECDFD64005C0F2D /* BDUITestsBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDUITestsBase.swift; sourceTree = "<group>"; };
+		8720D20C1ECE0EA6005C0F2D /* BDTestUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestUITests.swift; sourceTree = "<group>"; };
 		87D35CDE1E55C3D5004A792F /* BDTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D35CE11E55C3D5004A792F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87D35CE31E55C3D5004A792F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,11 +64,9 @@
 		87D35CF61E55C3D5004A792F /* BDTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDTestTests.swift; sourceTree = "<group>"; };
 		87D35CF81E55C3D5004A792F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87D35CFD1E55C3D5004A792F /* BDTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BDTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		87D35D011E55C3D5004A792F /* BDTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDTestUITests.swift; sourceTree = "<group>"; };
 		87D35D031E55C3D5004A792F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87D35D101E55C47D004A792F /* BDTestsMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsMain.swift; sourceTree = "<group>"; };
 		87D35D121E55E35B004A792F /* test_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_data.json; sourceTree = "<group>"; };
-		87D35D161E56042C004A792F /* BDTestsMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsMain.swift; sourceTree = "<group>"; };
 		87D35D181E5605B2004A792F /* TestAppDeleagte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAppDeleagte.swift; sourceTree = "<group>"; };
 		87D35D201E562611004A792F /* test_local_json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_local_json.json; sourceTree = "<group>"; };
 		87D35D251E565329004A792F /* BDTestsRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsRealm.swift; sourceTree = "<group>"; };
@@ -168,8 +169,8 @@
 		87D35D001E55C3D5004A792F /* BDTestUITests */ = {
 			isa = PBXGroup;
 			children = (
-				87D35D151E56042C004A792F /* lib */,
-				87D35D011E55C3D5004A792F /* BDTestUITests.swift */,
+				8720D20C1ECE0EA6005C0F2D /* BDTestUITests.swift */,
+				8720D20A1ECDFD64005C0F2D /* BDUITestsBase.swift */,
 				87D35D031E55C3D5004A792F /* Info.plist */,
 			);
 			path = BDTestUITests;
@@ -180,15 +181,6 @@
 			children = (
 				87D35D101E55C47D004A792F /* BDTestsMain.swift */,
 				87D35D251E565329004A792F /* BDTestsRealm.swift */,
-			);
-			name = lib;
-			path = ../../lib;
-			sourceTree = "<group>";
-		};
-		87D35D151E56042C004A792F /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				87D35D161E56042C004A792F /* BDTestsMain.swift */,
 			);
 			name = lib;
 			path = ../../lib;
@@ -284,16 +276,18 @@
 				TargetAttributes = {
 					87D35CDD1E55C3D5004A792F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = Q953KSA8G4;
+						DevelopmentTeam = JG4TU5Z5P9;
 						ProvisioningStyle = Automatic;
 					};
 					87D35CF11E55C3D5004A792F = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = JG4TU5Z5P9;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 87D35CDD1E55C3D5004A792F;
 					};
 					87D35CFC1E55C3D5004A792F = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = JG4TU5Z5P9;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 87D35CDD1E55C3D5004A792F;
 					};
@@ -513,8 +507,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87D35D171E56042C004A792F /* BDTestsMain.swift in Sources */,
-				87D35D021E55C3D5004A792F /* BDTestUITests.swift in Sources */,
+				8720D20E1ECE0F5A005C0F2D /* BDTestsMain.swift in Sources */,
+				8720D20B1ECDFD64005C0F2D /* BDUITestsBase.swift in Sources */,
+				8720D20D1ECE0EA6005C0F2D /* BDTestUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,7 +588,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -636,7 +631,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -650,7 +645,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q953KSA8G4;
+				DEVELOPMENT_TEAM = JG4TU5Z5P9;
 				INFOPLIST_FILE = BDTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedissident.bdtests;
@@ -665,7 +660,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q953KSA8G4;
+				DEVELOPMENT_TEAM = JG4TU5Z5P9;
 				INFOPLIST_FILE = BDTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedissident.bdtests;
@@ -680,6 +675,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = JG4TU5Z5P9;
 				INFOPLIST_FILE = BDTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.freshly.BDTestTests;
@@ -695,6 +691,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = JG4TU5Z5P9;
 				INFOPLIST_FILE = BDTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.freshly.BDTestTests;
@@ -709,6 +706,7 @@
 			baseConfigurationReference = 4B60D47F1A7E662B3BADDB8A /* Pods-BDTestUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = JG4TU5Z5P9;
 				INFOPLIST_FILE = BDTestUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.freshly.BDTestUITests;
@@ -723,6 +721,7 @@
 			baseConfigurationReference = 2EED327437ABF2B997726400 /* Pods-BDTestUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = JG4TU5Z5P9;
 				INFOPLIST_FILE = BDTestUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.freshly.BDTestUITests;

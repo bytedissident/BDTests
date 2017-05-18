@@ -77,6 +77,9 @@ class BDTestsMain  {
         guard let json = paste?.string else { return nil }
         guard let dict = self.convertToDictionary(text: json) else { return nil }
         
+        //CLEAR CLIPBOARD
+        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
+        
         return dict
     }
     
@@ -121,7 +124,13 @@ class BDTestsMain  {
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: true)
         
         if paste == nil { return nil }
-        return paste?.string
+        let clipString =  paste?.string
+        
+        //clean clipboard
+        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName))
+        
+        return clipString
+        
     }
     
     /*
