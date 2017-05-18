@@ -16,6 +16,7 @@
 		87BFCC691ECE3487001B1DF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87BFCC671ECE3487001B1DF8 /* LaunchScreen.storyboard */; };
 		87BFCC741ECE3487001B1DF8 /* BDTestsExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFCC731ECE3487001B1DF8 /* BDTestsExampleTests.swift */; };
 		87BFCC7F1ECE3487001B1DF8 /* BDTestsExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFCC7E1ECE3487001B1DF8 /* BDTestsExampleUITests.swift */; };
+		87BFCC8D1ECE3949001B1DF8 /* BDTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFCC8C1ECE3949001B1DF8 /* BDTestTests.swift */; };
 		DCAEB3331F2AC61792299CC9 /* Pods_BDTestsExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59DF7E1FFDEFA33F2E6447A1 /* Pods_BDTestsExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		87BFCC7A1ECE3487001B1DF8 /* BDTestsExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BDTestsExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87BFCC7E1ECE3487001B1DF8 /* BDTestsExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDTestsExampleUITests.swift; sourceTree = "<group>"; };
 		87BFCC801ECE3487001B1DF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87BFCC8C1ECE3949001B1DF8 /* BDTestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestTests.swift; sourceTree = "<group>"; };
 		B177AAB81D9E36B38AE028CE /* Pods-BDTestsExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsExampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsExampleUITests/Pods-BDTestsExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C05711807E8C04A87F810076 /* Pods-BDTestsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsExample/Pods-BDTestsExample.release.xcconfig"; sourceTree = "<group>"; };
 		E471DD213C19885474649274 /* Pods-BDTestsExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsExampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsExampleUITests/Pods-BDTestsExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		87BFCC721ECE3487001B1DF8 /* BDTestsExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				87BFCC8C1ECE3949001B1DF8 /* BDTestTests.swift */,
 				87BFCC731ECE3487001B1DF8 /* BDTestsExampleTests.swift */,
 				87BFCC751ECE3487001B1DF8 /* Info.plist */,
 			);
@@ -459,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87BFCC741ECE3487001B1DF8 /* BDTestsExampleTests.swift in Sources */,
+				87BFCC8D1ECE3949001B1DF8 /* BDTestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +709,7 @@
 				87BFCC851ECE3487001B1DF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		87BFCC861ECE3487001B1DF8 /* Build configuration list for PBXNativeTarget "BDTestsExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -713,6 +718,7 @@
 				87BFCC881ECE3487001B1DF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		87BFCC891ECE3487001B1DF8 /* Build configuration list for PBXNativeTarget "BDTestsExampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -721,6 +727,7 @@
 				87BFCC8B1ECE3487001B1DF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

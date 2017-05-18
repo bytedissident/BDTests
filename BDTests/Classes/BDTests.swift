@@ -10,7 +10,7 @@ import UIKit
 import OHHTTPStubs
 
 
-class BDTests  {
+public class BDTests  {
     
     //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
     var enviornmentName = "BD-UI-TEST"
@@ -18,7 +18,7 @@ class BDTests  {
     //DEFAULT HTTP RESPONSE CODE TO 200
     var httpResponseCode:Int32 = 200
     
-    init(enviornmentName:String?){
+    public init(enviornmentName:String?){
         if let envName = enviornmentName {
             self.enviornmentName = envName
         }
