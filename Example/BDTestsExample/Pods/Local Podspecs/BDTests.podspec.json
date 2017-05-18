@@ -19,7 +19,7 @@
     "ios": "8.0"
   },
   "source_files": "BDTests/Classes/**/*",
-  "public_header_files": "Pod/Classes/BDTests",
+  "frameworks": "XCTest",
   "dependencies": {
     "OHHTTPStubs": [
 

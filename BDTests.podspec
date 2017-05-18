@@ -37,7 +37,7 @@ TODO: Add long description of the pod here.
   # }
 
    #s.public_header_files = 'Pod/Classes/**/*'
-    s.frameworks = 'XCTest'
+    s.frameworks = 'XCTestCase'
    s.dependency 'OHHTTPStubs'
    s.dependency 'OHHTTPStubs/Swift'
 end

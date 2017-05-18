@@ -7,17 +7,17 @@
 //
 
 import XCTest
-import Alamofire
+
 
 @testable import BDTest
 
 class BDTestTests: XCTestCase {
     
-    var sut:BDTestsMain!
+    var sut:BDTests!
     override func setUp() {
         super.setUp()
         
-         self.sut = BDTestsMain(enviornmentName: nil)
+         self.sut = BDTests(enviornmentName: nil)
     
     }
     

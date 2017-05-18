@@ -10,7 +10,7 @@ import UIKit
 import OHHTTPStubs
 
 
-public class BDTestsMain  {
+public class BDTests  {
     
     //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
     var enviornmentName = "BD-UI-TEST"
