@@ -1,5 +1,5 @@
 //
-//  BDTestsMain.swift
+//  BDTests.swift
 //  BDTest
 //
 //  Created by Derek Bronston on 2/16/17.
@@ -8,9 +8,9 @@
 
 import UIKit
 import OHHTTPStubs
+import Alamofire
 
-
-class BDTestsMain  {
+class BDTests  {
     
     //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
     var enviornmentName = "BD-UI-TEST"

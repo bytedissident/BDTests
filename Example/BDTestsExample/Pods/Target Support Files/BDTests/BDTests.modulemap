@@ -1,6 +1,0 @@
-framework module BDTests {
-  umbrella header "BDTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
