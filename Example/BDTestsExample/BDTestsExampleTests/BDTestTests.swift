@@ -7,9 +7,8 @@
 //
 
 import XCTest
-
-
-@testable import BDTest
+import BDTests
+@testable import BDTestsExample
 
 class BDTestTests: XCTestCase {
     

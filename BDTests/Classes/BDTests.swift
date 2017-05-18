@@ -27,7 +27,7 @@ public class BDTests  {
     /*
      CREATE TEST
      */
-    func createTest(jsonString:String?,jsonFile:String?,httpCode:Int32)->Bool{
+    public func createTest(jsonString:String?,jsonFile:String?,httpCode:Int32)->Bool{
         print("CREATE TEST")
         var created = false
         
@@ -56,7 +56,7 @@ public class BDTests  {
     /*
      seed database
      */
-    func seedDatabase(json:String)->Bool{
+    public func seedDatabase(json:String)->Bool{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
         paste?.string = ""
@@ -69,7 +69,7 @@ public class BDTests  {
     /**
      read database data
      */
-    func readDatabaseData()->[String:Any]?{
+    public func readDatabaseData()->[String:Any]?{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
         if paste == nil { return nil }
@@ -85,13 +85,13 @@ public class BDTests  {
     
     
     
-    func removeTest(){
+    public func removeTest(){
         self.removeStubs()
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName))
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
     }
     
-    func removeModelTest(){
+    public func removeModelTest(){
         self.removeStubs()
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
     }
@@ -99,7 +99,7 @@ public class BDTests  {
     /*
      READ DATA FILE INTO STRING
      */
-    func openFileAndReadIntoString(urlString:String)->String?{
+    public func openFileAndReadIntoString(urlString:String)->String?{
         if let dir = Bundle.main.path(forResource: urlString, ofType:"json"){
             do {
                 let text2 = try String(contentsOfFile: dir)
@@ -119,7 +119,7 @@ public class BDTests  {
      3. json file
      
      */
-    func readClipboard()->String?{
+    public func readClipboard()->String?{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: true)
         
@@ -142,7 +142,7 @@ public class BDTests  {
      2. json string?
      3. json file
      */
-    func setClipboard(json:String)->Bool{
+    public func setClipboard(json:String)->Bool{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: true)
         paste?.string = ""
@@ -155,7 +155,7 @@ public class BDTests  {
     /*
      CONVERT JSON TO DICTIONARY
      */
-    func convertToDictionary(text: String) -> [String: Any]? {
+    public func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
                 return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
@@ -170,7 +170,7 @@ public class BDTests  {
     /*
      DETERMINE RESOPNSE TEXT
      */
-    func determineResponseText(dict:[String:Any])->String?{
+    public func determineResponseText(dict:[String:Any])->String?{
         
         if dict["data"] != nil {
             do {
@@ -198,7 +198,7 @@ public class BDTests  {
     /*
      STUB NETWORK
      */
-    func runTests()->Bool{
+    public func runTests()->Bool{
         
         guard let json = self.readClipboard() else { assert(false); return false }
         guard let dict = self.convertToDictionary(text: json) else { assert(false); return false }
@@ -236,14 +236,14 @@ public class BDTests  {
     /**
      REMOVE STUBS
      */
-    func removeStubs(){
+    public func removeStubs(){
         OHHTTPStubs.removeAllStubs()
     }
     
     /*
      IS TEST
      */
-    func isTest()->Bool{
+    public func isTest()->Bool{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: false)
         if paste?.string != nil {
@@ -257,7 +257,7 @@ public class BDTests  {
     /*
      HAS MODEL TEST
      */
-    func isModelTest()->Bool{
+    public func isModelTest()->Bool{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: false)
         if paste?.string != nil {
