@@ -12,7 +12,7 @@ import Alamofire
 
 class BDTestsMain  {
     
-    //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FOR YOUR ENVIORMENT
+    //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
     var enviornmentName = "BD-UI-TEST"
     
     //DEFAULT HTTP RESPONSE CODE TO 200
@@ -28,7 +28,7 @@ class BDTestsMain  {
      CREATE TEST
      */
     func createTest(jsonString:String?,jsonFile:String?,httpCode:Int32)->Bool{
-        
+        print("CREATE TEST")
         var created = false
         
         //SET THE HTTP RESPONSE CODE
@@ -38,7 +38,7 @@ class BDTestsMain  {
         if jsonString != nil {
             let json = "{\"code\":\(httpResponseCode),\"data\":\(jsonString!)}"
             created = self.setClipboard(json: json)
-            assert(created)
+            //assert(created)
         }
         
         //DID WE PASS A FILE URL
@@ -47,7 +47,7 @@ class BDTestsMain  {
             //set clipboard data
             let json = "{\"code\":\(httpResponseCode),\"data-file\":\"\(jsonFile!)\"}"
             created = self.setClipboard(json: json)
-            assert(created)
+            //assert(created)
         }
         //return success message
         return created
@@ -55,7 +55,7 @@ class BDTestsMain  {
     
     /*
      seed database
-    */
+     */
     func seedDatabase(json:String)->Bool{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
@@ -68,9 +68,9 @@ class BDTestsMain  {
     
     /**
      read database data
-    */
+     */
     func readDatabaseData()->[String:Any]?{
-    
+        
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
         if paste == nil { return nil }
         
@@ -81,14 +81,21 @@ class BDTestsMain  {
     }
     
     
+    
     func removeTest(){
         self.removeStubs()
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName))
+        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
+    }
+    
+    func removeModelTest(){
+        self.removeStubs()
+        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
     }
     
     /*
-        READ DATA FILE INTO STRING
-    */
+     READ DATA FILE INTO STRING
+     */
     func openFileAndReadIntoString(urlString:String)->String?{
         if let dir = Bundle.main.path(forResource: urlString, ofType:"json"){
             do {
@@ -110,7 +117,7 @@ class BDTestsMain  {
      
      */
     func readClipboard()->String?{
-    
+        
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: true)
         
         if paste == nil { return nil }
@@ -123,9 +130,9 @@ class BDTestsMain  {
      
      
      1. http code
-     2. json string? 
+     2. json string?
      3. json file
-    */
+     */
     func setClipboard(json:String)->Bool{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: true)
@@ -138,7 +145,7 @@ class BDTestsMain  {
     
     /*
      CONVERT JSON TO DICTIONARY
-    */
+     */
     func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
@@ -153,7 +160,7 @@ class BDTestsMain  {
     
     /*
      DETERMINE RESOPNSE TEXT
-    */
+     */
     func determineResponseText(dict:[String:Any])->String?{
         
         if dict["data"] != nil {
@@ -164,7 +171,7 @@ class BDTestsMain  {
                 guard let responseText = response else { assert(false); return nil}
                 return responseText
             }catch _ as NSError{
-                assert(false);
+                //assert(false);
                 return nil
             }
         }
@@ -175,13 +182,13 @@ class BDTestsMain  {
             
             return responseText
         }
-        assert(false);
+        //assert(false);
         return nil
     }
     
     /*
-    STUB NETWORK
-    */
+     STUB NETWORK
+     */
     func runTests()->Bool{
         
         guard let json = self.readClipboard() else { assert(false); return false }
@@ -214,25 +221,24 @@ class BDTestsMain  {
             let stubData = responseText.data(using: String.Encoding.utf8)
             return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
         }
-        
         return true
     }
     
     /**
      REMOVE STUBS
-    */
+     */
     func removeStubs(){
-         OHHTTPStubs.removeAllStubs()
+        OHHTTPStubs.removeAllStubs()
     }
     
     /*
-    IS TEST
-    */
+     IS TEST
+     */
     func isTest()->Bool{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: false)
         if paste?.string != nil {
-        
+            
             return true
         }
         return false
@@ -240,7 +246,7 @@ class BDTestsMain  {
     
     
     /*
-    HAS MODEL TEST
+     HAS MODEL TEST
      */
     func isModelTest()->Bool{
         
