@@ -6,19 +6,19 @@ target 'BDTestsExample' do
   use_frameworks!
 
   # Pods for BDTestsExample
-  pod 'BDTests', :git => 'https://github.com/bytedissident/BDTests'
+  #pod 'BDTests', :git => 'https://github.com/bytedissident/BDTests'
 
 
   target 'BDTestsExampleTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'BDTests', :git => 'https://github.com/bytedissident/BDTests'
+    #pod 'BDTests', :git => 'https://github.com/bytedissident/BDTests'
   end
 
   target 'BDTestsExampleUITests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'BDTests', :git => 'https://github.com/bytedissident/BDTests'
+    #pod 'BDTests', :git => 'https://github.com/bytedissident/BDTests'
   end
 
 end
