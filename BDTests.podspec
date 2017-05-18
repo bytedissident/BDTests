@@ -36,7 +36,7 @@ TODO: Add long description of the pod here.
   #   'BDTests' => ['BDTests/Assets/*.png']
   # }
 
-   s.public_header_files = 'Pod/Classes/BDTests'
+   #s.public_header_files = 'Pod/Classes/**/*'
   # s.frameworks = 'UIKit', 'MapKit'
    s.dependency 'OHHTTPStubs'
    s.dependency 'OHHTTPStubs/Swift'

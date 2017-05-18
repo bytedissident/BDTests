@@ -8,7 +8,7 @@
 
 import UIKit
 import OHHTTPStubs
-import Alamofire
+
 
 class BDTests  {
     
