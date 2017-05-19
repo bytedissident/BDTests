@@ -27,11 +27,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BDTests:
-    :commit: f2e5b067f9e4f3be83ed32a1031b485460eeb7e9
+    :commit: 9e4e8a70933b598760417b87ee7fb297e498e2d4
     :git: https://github.com/bytedissident/BDTests
 
 SPEC CHECKSUMS:
-  BDTests: 86ed0689c7463f0defc644543e8a2ae0b5d89ec7
+  BDTests: b5bee770c5f62c2e9b11766064c9a905243edcda
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
 
 PODFILE CHECKSUM: 748b3ce38b36867d7da63516186deed7524a4d04
