@@ -9,6 +9,7 @@
 import XCTest
 import BDTests
 
+
 class BDTestsExampleUITests: BDTestsUIBase{
     
     override func setUp() {

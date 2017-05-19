@@ -7,17 +7,16 @@
 //
 
 import XCTest
-import BDTests
 
-class BDTestsUIBase:XCTestCase {
+open class BDTestsUIBase:XCTestCase {
     
-    override func setUp() {
+    override open func setUp() {
         super.setUp()
         
         continueAfterFailure = true
     }
     
-    override func tearDown() {
+    override open func tearDown() {
         
         let test = BDTests(enviornmentName: nil)
         test.removeTest()
@@ -25,7 +24,7 @@ class BDTestsUIBase:XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    public func testExample() {
         
         let app = XCUIApplication()
         app.launch()
@@ -38,7 +37,7 @@ class BDTestsUIBase:XCTestCase {
         
     }
     
-    func seedTest(spec:String){
+   public func seedTest(spec:String){
         
         let test = BDTests(enviornmentName: nil)
         let model = test.seedDatabase(json: "{\"\(spec)\":true}")
@@ -48,7 +47,7 @@ class BDTestsUIBase:XCTestCase {
         app.launch()
     }
     
-    func textfield(identifier:String,text:String){
+    public func textfield(identifier:String,text:String){
         
         let app = XCUIApplication()
         
@@ -62,7 +61,7 @@ class BDTestsUIBase:XCTestCase {
         
     }
     
-    func secureTextfield(identifier:String,text:String){
+    public func secureTextfield(identifier:String,text:String){
         
         let app = XCUIApplication()
         
@@ -77,7 +76,7 @@ class BDTestsUIBase:XCTestCase {
     }
     
     //TEST LABEL
-    func label(text:String,identifier:String){
+    public func label(text:String,identifier:String){
         
         let app = XCUIApplication()
         
@@ -91,7 +90,7 @@ class BDTestsUIBase:XCTestCase {
         XCTAssertEqual(label.label, text)
     }
     
-    func labelContains(text:String,identifier:String){
+    public func labelContains(text:String,identifier:String){
         
         let app = XCUIApplication()
         
@@ -106,7 +105,7 @@ class BDTestsUIBase:XCTestCase {
     }
     
     
-    func view(exists:String,identifier:String){
+   public func view(exists:String,identifier:String){
         
         let app = XCUIApplication()
         let label = app.otherElements[identifier]
@@ -116,7 +115,7 @@ class BDTestsUIBase:XCTestCase {
     }
     
     //TEST ALERT
-    func alert(title:String,message:String?,button:String?,tap:Bool?){
+    public func alert(title:String,message:String?,button:String?,tap:Bool?){
         
         let app = XCUIApplication()
         
@@ -142,7 +141,7 @@ class BDTestsUIBase:XCTestCase {
         }
     }
     
-    func alertFalse(title:String){
+   public func alertFalse(title:String){
         let app = XCUIApplication()
         
         let alert = app.alerts[title]
@@ -153,7 +152,7 @@ class BDTestsUIBase:XCTestCase {
     }
     
     //TEST BUTTON
-    func button(identifier:String,tap:Bool?,exists:String){
+   public func button(identifier:String,tap:Bool?,exists:String){
         
         let app = XCUIApplication()
         
@@ -167,7 +166,7 @@ class BDTestsUIBase:XCTestCase {
         }
     }
     
-    func buttonLabel(identifier:String,text:String){
+   public func buttonLabel(identifier:String,text:String){
         let app = XCUIApplication()
         
         let btn = app.buttons[identifier]
@@ -179,7 +178,7 @@ class BDTestsUIBase:XCTestCase {
         XCTAssertEqual(app.label, text)
     }
     
-    func statusBar(identifier:String,tap:Bool?){
+   public func statusBar(identifier:String,tap:Bool?){
         
         let app = XCUIApplication()
         
@@ -194,7 +193,7 @@ class BDTestsUIBase:XCTestCase {
     }
     
     //ACTION SHEET
-    func sheet(title:String,tap:Bool?,numberOfItems:UInt?){
+   public func sheet(title:String,tap:Bool?,numberOfItems:UInt?){
         
         let app = XCUIApplication()
         
@@ -214,7 +213,7 @@ class BDTestsUIBase:XCTestCase {
         }
     }
     
-    func collectionWithLabel(cellLabel:String,tap:Bool?){
+   public func collectionWithLabel(cellLabel:String,tap:Bool?){
         
         let app = XCUIApplication()
         let firstChild = app.collectionViews[cellLabel].children(matching:.any).element(boundBy: 0)
@@ -226,7 +225,7 @@ class BDTestsUIBase:XCTestCase {
         }
     }
     
-    func collectionCell(cellLabel:String,labelString:String?,tap:Bool?){
+   public func collectionCell(cellLabel:String,labelString:String?,tap:Bool?){
         
         let app = XCUIApplication()
         let firstChild = app.collectionViews.children(matching:.any).element(boundBy: 0)
@@ -247,7 +246,7 @@ class BDTestsUIBase:XCTestCase {
         }
     }
     
-    func collectionCellLabelExists(cellLabel:String,exists:String){
+   public func collectionCellLabelExists(cellLabel:String,exists:String){
         
         let app = XCUIApplication()
         let firstChild = app.collectionViews.children(matching:.any).element(boundBy: 0)
@@ -262,7 +261,7 @@ class BDTestsUIBase:XCTestCase {
         }
     }
     
-    func collectionButton(buttonLabel:String,tap:Bool?){
+   public func collectionButton(buttonLabel:String,tap:Bool?){
         
         let app = XCUIApplication()
         let firstChild = app.collectionViews.children(matching:.any).element(boundBy: 0)
@@ -280,7 +279,7 @@ class BDTestsUIBase:XCTestCase {
         }
     }
     
-    func tabBar(tabIndex:UInt){
+   public func tabBar(tabIndex:UInt){
         
         let tabBarsQuery = XCUIApplication().tabBars
         let button = tabBarsQuery.children(matching: .button).element(boundBy: tabIndex)
@@ -289,13 +288,13 @@ class BDTestsUIBase:XCTestCase {
         
     }
     
-    func tableCellByIndex(cellIndex:UInt){
+   public func tableCellByIndex(cellIndex:UInt){
         let app = XCUIApplication()
         app.tables.children(matching: .any).element(boundBy:cellIndex).tap()
     }
     
     
-    func tableCellByIdentifier(text:String,tap:Bool){
+   public func tableCellByIdentifier(text:String,tap:Bool){
         
         let app = XCUIApplication()
         let label =  app.tables.staticTexts[text]
@@ -308,7 +307,7 @@ class BDTestsUIBase:XCTestCase {
         }
     }
     
-    func tableCellByIdentifierDoesNotExist(text:String){
+   public func tableCellByIdentifierDoesNotExist(text:String){
         
         let app = XCUIApplication()
         let label =  app.tables.staticTexts[text]
@@ -317,7 +316,7 @@ class BDTestsUIBase:XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
     }
     
-    func navBar(navIdentifier:String){
+   public func navBar(navIdentifier:String){
         let app = XCUIApplication()
         let bar = app.navigationBars[navIdentifier]
         let navBar_exists = NSPredicate(format: "exists == true")
@@ -328,7 +327,7 @@ class BDTestsUIBase:XCTestCase {
     }
     
     
-    func login(){
+   public func login(){
         
         let test = BDTests(enviornmentName: nil)
         _ = test.createTest(jsonString: nil, jsonFile: "TestDataInitialData", httpCode: 200)

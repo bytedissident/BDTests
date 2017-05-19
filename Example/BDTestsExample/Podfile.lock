@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.3.0)
   - BDTests (0.1.0):
     - OHHTTPStubs
     - OHHTTPStubs/Swift
@@ -19,6 +20,7 @@ PODS:
     - OHHTTPStubs/Core
 
 DEPENDENCIES:
+  - Alamofire
   - BDTests (from `https://github.com/bytedissident/BDTests`)
 
 EXTERNAL SOURCES:
@@ -27,13 +29,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BDTests:
-    :commit: 9e4e8a70933b598760417b87ee7fb297e498e2d4
+    :commit: 3912f300d61d35dfd1bdc0364e83790bb8b0295a
     :git: https://github.com/bytedissident/BDTests
 
 SPEC CHECKSUMS:
-  BDTests: b5bee770c5f62c2e9b11766064c9a905243edcda
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  BDTests: bfc20973f3e35df17af7bdaa80c2004f2ad7d031
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
 
-PODFILE CHECKSUM: 748b3ce38b36867d7da63516186deed7524a4d04
+PODFILE CHECKSUM: 8eaa08a81a60f4f090a328d685817d9c3ffd07a4
 
 COCOAPODS: 1.2.1
