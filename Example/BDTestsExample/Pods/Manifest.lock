@@ -1,3 +1,39 @@
-PODFILE CHECKSUM: 7c890ffc3725c1e267bea868025aaf7df8c1a134
+PODS:
+  - BDTests (0.1.0):
+    - OHHTTPStubs
+    - OHHTTPStubs/Swift
+  - OHHTTPStubs (5.2.3):
+    - OHHTTPStubs/Default (= 5.2.3)
+  - OHHTTPStubs/Core (5.2.3)
+  - OHHTTPStubs/Default (5.2.3):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (5.2.3):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (5.2.3):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (5.2.3)
+  - OHHTTPStubs/Swift (5.2.3):
+    - OHHTTPStubs/Core
+
+DEPENDENCIES:
+  - BDTests (from `https://github.com/bytedissident/BDTests`)
+
+EXTERNAL SOURCES:
+  BDTests:
+    :git: https://github.com/bytedissident/BDTests
+
+CHECKOUT OPTIONS:
+  BDTests:
+    :commit: f2e5b067f9e4f3be83ed32a1031b485460eeb7e9
+    :git: https://github.com/bytedissident/BDTests
+
+SPEC CHECKSUMS:
+  BDTests: 86ed0689c7463f0defc644543e8a2ae0b5d89ec7
+  OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
+
+PODFILE CHECKSUM: 748b3ce38b36867d7da63516186deed7524a4d04
 
 COCOAPODS: 1.2.1

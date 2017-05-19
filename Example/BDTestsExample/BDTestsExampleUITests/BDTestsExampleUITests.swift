@@ -9,7 +9,7 @@
 import XCTest
 import BDTests
 
-class BDTestsExampleUITests: BDUITestBase{
+class BDTestsExampleUITests: BDTestsUIBase{
     
     override func setUp() {
         super.setUp()
