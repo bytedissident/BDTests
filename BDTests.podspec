@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'BDTests'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of BDTests.'
+  s.summary          = 'A Swift UITesting framework. Intended to simplify stubbing UITests'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
