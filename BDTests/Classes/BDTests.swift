@@ -13,10 +13,10 @@ import OHHTTPStubs
 public class BDTests  {
     
     //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
-    var enviornmentName = "BD-UI-TEST"
+     public var enviornmentName = "BD-UI-TEST"
     
     //DEFAULT HTTP RESPONSE CODE TO 200
-    var httpResponseCode:Int32 = 200
+     public var httpResponseCode:Int32 = 200
     
     public init(enviornmentName:String?){
         if let envName = enviornmentName {

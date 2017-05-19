@@ -7,8 +7,9 @@
 //
 
 import XCTest
+import BDTests
 
-class BDTestsRealm:XCTTestCase {
+class BDUITestBase: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -18,7 +19,7 @@ class BDTestsRealm:XCTTestCase {
     
     override func tearDown() {
         
-        let test = BDTestsMain(enviornmentName: nil)
+        let test = BDTests(enviornmentName: nil)
         test.removeTest()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
@@ -39,7 +40,7 @@ class BDTestsRealm:XCTTestCase {
     
     func seedTest(spec:String){
         
-        let test = BDTestsMain(enviornmentName: nil)
+        let test = BDTests(enviornmentName: nil)
         let model = test.seedDatabase(json: "{\"\(spec)\":true}")
         XCTAssert(model)
         //XCUIApplication().launch()
@@ -329,7 +330,7 @@ class BDTestsRealm:XCTTestCase {
     
     func login(){
         
-        let test = BDTestsMain(enviornmentName: nil)
+        let test = BDTests(enviornmentName: nil)
         _ = test.createTest(jsonString: nil, jsonFile: "TestDataInitialData", httpCode: 200)
         
         
