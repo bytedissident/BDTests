@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///let test = BDTests(enviornmentName:nil)
         
         // Override point for customization after application launch.
+        _ =  BDTestsEnv().testEnv()
 
         return true
     }

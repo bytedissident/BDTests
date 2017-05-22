@@ -11,7 +11,7 @@ import Foundation
 
 public class BDTestsHelper:NSObject {
 
-    func testMethod(){
+    public func testMethod(){
         print("Test Method")
     }
 }

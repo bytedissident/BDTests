@@ -7,9 +7,7 @@
 //
 
 import UIKit
-
 import Alamofire
-//import RealmSwift
 
 class ViewController: UIViewController {
     
@@ -47,13 +45,6 @@ class ViewController: UIViewController {
                 self.valueLabel.text = "FAIL"
             }
         }
-        
-        /*let realm = try! Realm()
-        let obj = realm.objects(BDTestRealmObject.self).last
-        if let name = obj?.name {
-            self.modelDataLabel.text = name
-            self.modelDataLabel.accessibilityLabel = name
-        }*/
     }
 }
 
