@@ -12,7 +12,7 @@ import Foundation
 public class BDTestsEnv {
     
     public init(){}
-
+    
     public func testEnv()->(networkTest:Bool,modelTest:Bool){
         
         var isNetworkTest = false

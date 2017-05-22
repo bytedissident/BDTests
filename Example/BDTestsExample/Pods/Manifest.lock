@@ -29,7 +29,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BDTests:
-    :commit: 9b1c5e647a7e9d019701cc425a771b4b974a3641
+    :commit: b46cc7c66465c725485f8056f3271d2d04e67515
     :git: https://github.com/bytedissident/BDTests
 
 SPEC CHECKSUMS:
