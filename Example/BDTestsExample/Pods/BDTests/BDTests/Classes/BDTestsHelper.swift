@@ -9,7 +9,7 @@
 import Foundation
 
 
-public class BDTestsHelper:NSObject {
+class BDTestsHelper:NSObject {
 
     func testMethod(){
         print("Test Method")

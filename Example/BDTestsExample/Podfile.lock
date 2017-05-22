@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.3.0)
-  - BDTests (0.1.0):
+  - BDTests (0.0.1):
     - OHHTTPStubs
     - OHHTTPStubs/Swift
   - OHHTTPStubs (5.2.3):
@@ -29,12 +29,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BDTests:
-    :commit: 3912f300d61d35dfd1bdc0364e83790bb8b0295a
+    :commit: 27f3cd40c4783f893a86dc5a589e0496c9042b3a
     :git: https://github.com/bytedissident/BDTests
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
-  BDTests: bfc20973f3e35df17af7bdaa80c2004f2ad7d031
+  BDTests: b9710fea9cfcb28867b65f88a7228dc94dcc8697
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
 
 PODFILE CHECKSUM: 8eaa08a81a60f4f090a328d685817d9c3ffd07a4

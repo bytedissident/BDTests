@@ -9,9 +9,9 @@
 import Foundation
 
 
-public class BDTestsEnv {
+class BDTestsEnv {
 
-    public func testEnv()->(networkTest:Bool,modelTest:Bool){
+    func testEnv()->(networkTest:Bool,modelTest:Bool){
         
         var isNetworkTest = false
         var isModelTest = false
