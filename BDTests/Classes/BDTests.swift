@@ -69,18 +69,18 @@ public class BDTests  {
     /**
      read database data
      */
-    public func readDatabaseData()->[String:Any]?{
+    public func readDatabaseData()->String?{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
         if paste == nil { return nil }
         
-        guard let json = paste?.string else { return nil }
-        guard let dict = self.convertToDictionary(text: json) else { return nil }
+        //guard let json = paste?.string else { return nil }
+        //guard let dict = self.convertToDictionary(text: json) else { return nil }
         
         //CLEAR CLIPBOARD
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
+       //UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
         
-        return dict
+        return paste?.string
     }
     
     

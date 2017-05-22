@@ -15,14 +15,13 @@
 		8750529E1ED3482100A04704 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8750529C1ED3482100A04704 /* LaunchScreen.storyboard */; };
 		875052B41ED3482100A04704 /* BDTestsUnitTestsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052B31ED3482100A04704 /* BDTestsUnitTestsUITests.swift */; };
 		875052CA1ED348D800A04704 /* BDTestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052C91ED348D800A04704 /* BDTestsTests.swift */; };
-		875052D01ED34BBC00A04704 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 875052CE1ED34BBC00A04704 /* .gitkeep */; };
-		875052D11ED34BBC00A04704 /* BDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052CF1ED34BBC00A04704 /* BDTests.swift */; };
-		875052D21ED34BC000A04704 /* BDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052CF1ED34BBC00A04704 /* BDTests.swift */; };
 		875052D51ED34CED00A04704 /* test_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 875052D31ED34CED00A04704 /* test_data.json */; };
 		875052D61ED34CED00A04704 /* test_local_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 875052D41ED34CED00A04704 /* test_local_json.json */; };
-		875052D81ED34EE900A04704 /* BDTestsEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052D71ED34EE900A04704 /* BDTestsEnv.swift */; };
-		875052DA1ED34F7E00A04704 /* BDTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052D91ED34F7E00A04704 /* BDTestsHelper.swift */; };
 		875052DC1ED3576700A04704 /* BDTestsEnvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052DB1ED3576700A04704 /* BDTestsEnvTests.swift */; };
+		875052E51ED360ED00A04704 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 875052E11ED360ED00A04704 /* .gitkeep */; };
+		875052E61ED360ED00A04704 /* BDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052E21ED360ED00A04704 /* BDTests.swift */; };
+		875052E71ED360ED00A04704 /* BDTestsEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052E31ED360ED00A04704 /* BDTestsEnv.swift */; };
+		875052E81ED360ED00A04704 /* BDTestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052E41ED360ED00A04704 /* BDTestsHelper.swift */; };
 		C9A7AA36C90CABD3483B61F6 /* Pods_BDTestsUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D9DE037DD7F0D0CFD98C3BE /* Pods_BDTestsUnitTests.framework */; };
 		E1EFAE57E7F756FFB5113871 /* Pods_BDTestsUnitTestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 757095E08E96D66940B99A43 /* Pods_BDTestsUnitTestsTests.framework */; };
 /* End PBXBuildFile section */
@@ -63,13 +62,13 @@
 		875052B51ED3482100A04704 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		875052C91ED348D800A04704 /* BDTestsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsTests.swift; sourceTree = "<group>"; };
 		875052CB1ED34A1C00A04704 /* BDTestsUnitTestsTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BDTestsUnitTestsTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		875052CE1ED34BBC00A04704 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		875052CF1ED34BBC00A04704 /* BDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTests.swift; sourceTree = "<group>"; };
 		875052D31ED34CED00A04704 /* test_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_data.json; sourceTree = "<group>"; };
 		875052D41ED34CED00A04704 /* test_local_json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test_local_json.json; sourceTree = "<group>"; };
-		875052D71ED34EE900A04704 /* BDTestsEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsEnv.swift; sourceTree = "<group>"; };
-		875052D91ED34F7E00A04704 /* BDTestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsHelper.swift; sourceTree = "<group>"; };
 		875052DB1ED3576700A04704 /* BDTestsEnvTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsEnvTests.swift; sourceTree = "<group>"; };
+		875052E11ED360ED00A04704 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		875052E21ED360ED00A04704 /* BDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTests.swift; sourceTree = "<group>"; };
+		875052E31ED360ED00A04704 /* BDTestsEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsEnv.swift; sourceTree = "<group>"; };
+		875052E41ED360ED00A04704 /* BDTestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsHelper.swift; sourceTree = "<group>"; };
 		9CFFBF0C40B823CF473B1EDA /* Pods-BDTestsUnitTestsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTestsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTestsTests/Pods-BDTestsUnitTestsTests.release.xcconfig"; sourceTree = "<group>"; };
 		B0A7C41D297A46B813BB1A89 /* Pods-BDTestsUnitTestsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTestsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTestsUITests/Pods-BDTestsUnitTestsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BEFB14F0E765A3E3205B17A4 /* Pods-BDTestsUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTests/Pods-BDTestsUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,9 +117,9 @@
 		875052871ED3482100A04704 = {
 			isa = PBXGroup;
 			children = (
+				875052E01ED360ED00A04704 /* Classes */,
 				875052D31ED34CED00A04704 /* test_data.json */,
 				875052D41ED34CED00A04704 /* test_local_json.json */,
-				875052CD1ED34BBC00A04704 /* Classes */,
 				875052921ED3482100A04704 /* BDTestsUnitTests */,
 				875052A71ED3482100A04704 /* BDTestsUnitTestsTests */,
 				875052B21ED3482100A04704 /* BDTestsUnitTestsUITests */,
@@ -173,15 +172,16 @@
 			path = BDTestsUnitTestsUITests;
 			sourceTree = "<group>";
 		};
-		875052CD1ED34BBC00A04704 /* Classes */ = {
+		875052E01ED360ED00A04704 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				875052CE1ED34BBC00A04704 /* .gitkeep */,
-				875052CF1ED34BBC00A04704 /* BDTests.swift */,
-				875052D71ED34EE900A04704 /* BDTestsEnv.swift */,
-				875052D91ED34F7E00A04704 /* BDTestsHelper.swift */,
+				875052E11ED360ED00A04704 /* .gitkeep */,
+				875052E21ED360ED00A04704 /* BDTests.swift */,
+				875052E31ED360ED00A04704 /* BDTestsEnv.swift */,
+				875052E41ED360ED00A04704 /* BDTestsHelper.swift */,
 			);
-			path = Classes;
+			name = Classes;
+			path = ../../BDTests/Classes;
 			sourceTree = "<group>";
 		};
 		D77F222CA7B8F10374EF31AC /* Pods */ = {
@@ -318,8 +318,8 @@
 				8750529E1ED3482100A04704 /* LaunchScreen.storyboard in Resources */,
 				8750529B1ED3482100A04704 /* Assets.xcassets in Resources */,
 				875052991ED3482100A04704 /* Main.storyboard in Resources */,
+				875052E51ED360ED00A04704 /* .gitkeep in Resources */,
 				875052D61ED34CED00A04704 /* test_local_json.json in Resources */,
-				875052D01ED34BBC00A04704 /* .gitkeep in Resources */,
 				875052D51ED34CED00A04704 /* test_data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,10 +484,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				875052961ED3482100A04704 /* ViewController.swift in Sources */,
-				875052D81ED34EE900A04704 /* BDTestsEnv.swift in Sources */,
-				875052D11ED34BBC00A04704 /* BDTests.swift in Sources */,
+				875052E71ED360ED00A04704 /* BDTestsEnv.swift in Sources */,
+				875052E61ED360ED00A04704 /* BDTests.swift in Sources */,
 				875052941ED3482100A04704 /* AppDelegate.swift in Sources */,
-				875052DA1ED34F7E00A04704 /* BDTestsHelper.swift in Sources */,
+				875052E81ED360ED00A04704 /* BDTestsHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,7 +497,6 @@
 			files = (
 				875052CA1ED348D800A04704 /* BDTestsTests.swift in Sources */,
 				875052DC1ED3576700A04704 /* BDTestsEnvTests.swift in Sources */,
-				875052D21ED34BC000A04704 /* BDTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
