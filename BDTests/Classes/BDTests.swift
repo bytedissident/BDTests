@@ -24,8 +24,12 @@ public class BDTests  {
         }
     }
     
-    /*
-     CREATE TEST
+    /**
+     Creates a test
+     
+     @param jsonString:String?, jsonFile:String?, httpCode:Int32
+     @return Bool
+     
      */
     public func createTest(jsonString:String?,jsonFile:String?,httpCode:Int32)->Bool{
         print("CREATE TEST")
@@ -53,21 +57,27 @@ public class BDTests  {
         return created
     }
     
-    /*
-     seed database
+    /**
+     the ref variable is the string representation on the method that we want to call in order to set up test
+     
+     @param ref:String
+     @return Bool
      */
-    public func seedDatabase(json:String)->Bool{
+    public func seedDatabase(ref:String)->Bool{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
         paste?.string = ""
-        paste?.string = json
+        paste?.string = ref
         
         if paste == nil { return false }
         return true
     }
     
     /**
-     read database data
+     Reads the ref variable out of the clipboard in order to set up the test
+     
+     @param: None
+     @retrun: String?
      */
     public func readDatabaseData()->String?{
         
@@ -84,20 +94,36 @@ public class BDTests  {
     }
     
     
-    
+    /**
+     Removes all tests. Removes:stubs, pasteboards
+     
+     @param: none
+     @return : none
+    */
     public func removeTest(){
         self.removeStubs()
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName))
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
     }
     
+    
+    /**
+     removes a model test and stubs
+     
+     @param: none
+     @return: none
+    */
     public func removeModelTest(){
         self.removeStubs()
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
     }
     
-    /*
+    /**
      READ DATA FILE INTO STRING
+     
+     @param: urlString:String
+     @return:String?
+     
      */
     public func openFileAndReadIntoString(urlString:String)->String?{
         if let dir = Bundle.main.path(forResource: urlString, ofType:"json"){
@@ -111,13 +137,15 @@ public class BDTests  {
         return nil
     }
     
-    /*
+    /**
      READ CLIPBOARD
      
      1. http code
      2. json string?
      3. json file
      
+     @param: none
+     @return String?
      */
     public func readClipboard()->String?{
         
@@ -133,7 +161,7 @@ public class BDTests  {
         
     }
     
-    /*
+    /**
      SET CLIPBOARD
      pass json into clipboard for later review
      
@@ -141,6 +169,8 @@ public class BDTests  {
      1. http code
      2. json string?
      3. json file
+     
+     @return: Bool
      */
     public func setClipboard(json:String)->Bool{
         
@@ -152,8 +182,11 @@ public class BDTests  {
         return true
     }
     
-    /*
+    /**
      CONVERT JSON TO DICTIONARY
+     
+     @param: textString
+     @return: [String:Any]?
      */
     public func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
@@ -167,8 +200,11 @@ public class BDTests  {
     }
     
     
-    /*
+    /**
      DETERMINE RESOPNSE TEXT
+     
+     @param: dict[String:Any]
+     @return: String?
      */
     public func determineResponseText(dict:[String:Any])->String?{
         
@@ -195,7 +231,7 @@ public class BDTests  {
         return nil
     }
     
-    /*
+    /**
      STUB NETWORK
      */
     public func runTests()->Bool{
@@ -235,13 +271,17 @@ public class BDTests  {
     
     /**
      REMOVE STUBS
+     
+     @return: none
      */
     public func removeStubs(){
         OHHTTPStubs.removeAllStubs()
     }
     
-    /*
+    /**
      IS TEST
+     
+     @return: Bool
      */
     public func isTest()->Bool{
         
@@ -254,8 +294,10 @@ public class BDTests  {
     }
     
     
-    /*
+    /**
      HAS MODEL TEST
+     
+     @return: Bool
      */
     public func isModelTest()->Bool{
         
