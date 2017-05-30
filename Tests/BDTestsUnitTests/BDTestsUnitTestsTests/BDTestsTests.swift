@@ -200,6 +200,7 @@ class BDTestsTests: XCTestCase {
         }
     }
     
+    
     func testReadDatabaseData(){
         
         let json = "{\"key\":\"value\"}"
@@ -207,12 +208,10 @@ class BDTestsTests: XCTestCase {
         XCTAssert(modelData)
         
         guard let  db = sut.readDatabaseData() else { XCTFail(); return }
-        //XCTAssertEqual(db["key"] as? String, "value")
+        XCTAssertEqual(db,"{\"key\":\"value\"}")
         
         let  db2 = sut.readDatabaseData()
         XCTAssertNil(db2)
-        
-        
     }
     
     func testIsModelTest_false(){

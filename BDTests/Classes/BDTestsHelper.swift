@@ -8,8 +8,8 @@
 
 import Foundation
 
-
-public class BDTestsHelper:NSObject {
+//EXTEND THIS CLASS TO PREP APP FOR TESTS
+open class BDTestsHelper:NSObject {
     
     public override init(){}
 

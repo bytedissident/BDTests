@@ -2,12 +2,11 @@
 //  AppDelegate.swift
 //  BDTestsExample
 //
-//  Created by Derek Bronston on 5/18/17.
+//  Created by Derek Bronston on 5/22/17.
 //  Copyright © 2017 Derek Bronston. All rights reserved.
 //
 
 import UIKit
-import BDTests
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,12 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        ///let test = BDTests(enviornmentName:nil)
-        
         // Override point for customization after application launch.
-        _ =  BDTestsEnv().testEnv()
-
         return true
     }
 

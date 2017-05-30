@@ -1,6 +1,0 @@
-framework module Pods_BDTestsExample_BDTestsExampleUITests {
-  umbrella header "Pods-BDTestsExample-BDTestsExampleUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

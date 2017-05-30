@@ -20,6 +20,7 @@ public class BDTestsEnv {
         let bdTests = BDTests(enviornmentName: nil)
         if bdTests.isTest() {
             isNetworkTest = true
+            _ = bdTests.runTests()
         }
         
         if bdTests.isModelTest(){
