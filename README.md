@@ -30,14 +30,14 @@ In your AppDelegate you need to import BDtests and add the testEnv method to you
 import BDTests
 ```
 
-```ruby
+```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         //CHECK AND SET UP TESTS 
         _ = BDTestsEnv().testEnv()
 
         return true
-    }
+}
 ```
 
 ## Network Tests 
@@ -54,13 +54,13 @@ This test will intercept the call made by your app to a server and return the JS
 In cases where you want to do multiple requests simply create a 2nd test with a different enviornment name:
 
 ```ruby
-		//TEST 1
-	 	let sut = BDTests(enviornment:nil)
-        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
+//TEST 1
+	let sut = BDTests(enviornment:nil)
+let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
 
-		//TEST 2
-        sut.enviornmentName = "test-2
-        let test2 = sut.createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)
+//TEST 2
+sut.enviornmentName = "test-2
+let test2 = sut.createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)
 ```
 
 ## Setting up your app's state for a test
@@ -69,16 +69,16 @@ If you want to to some set up prior to running your test that is not related to 
   1. In your apps code create an extension of BDTestsHelper and add a method to do whatever set up you need doen here.
 
 ```ruby
-	import BDTests 
+import BDTests 
 
-	extension BDTestsHelper {
+extension BDTestsHelper {
 
-		func setUpMethod(){
+	func setUpMethod(){
 
-			//DO SOME SET UP HERE
+		//DO SOME SET UP HERE
 
-		}
 	}
+}
 ```
 
 2. In your test code call the seedDatabase method and pass the name of your method that you wnat to call as a String value
