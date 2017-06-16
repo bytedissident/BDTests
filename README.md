@@ -41,7 +41,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 
 ## Network Tests 
-`Create an instance of BDTests: 
+Create an instance of BDTests: 
 ```ruby
 let test = BDTests(enviornment:nil)
 ```
