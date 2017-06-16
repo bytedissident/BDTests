@@ -46,7 +46,7 @@ class BDTestsEnvTests: XCTestCase {
         let test = BDTests(enviornmentName: nil)
         test.removeTest()
         test.removeModelTest()
-        _ = test.seedDatabase(json: "testMe-method_does_not_exist")
+        _ = test.seedDatabase(ref: "testMe-method_does_not_exist")
         
         
         let sut = BDTestsEnv()
@@ -63,7 +63,7 @@ class BDTestsEnvTests: XCTestCase {
         let test = BDTests(enviornmentName: nil)
         test.removeTest()
         test.removeModelTest()
-        _ = test.seedDatabase(json: "testMethod")
+        _ = test.seedDatabase(ref: "testMethod")
         
         
         let sut = BDTestsEnv()

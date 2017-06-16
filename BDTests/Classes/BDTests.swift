@@ -9,15 +9,19 @@
 import UIKit
 import OHHTTPStubs
 
-
 public class BDTests  {
     
-    //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
+    /**
+        DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
+     */
      public var enviornmentName = "BD-UI-TEST"
     
-    //DEFAULT HTTP RESPONSE CODE TO 200
+    /**
+        DEFAULT HTTP RESPONSE CODE TO 200
+     */
      public var httpResponseCode:Int32 = 200
     
+    /** */
     public init(enviornmentName:String?){
         if let envName = enviornmentName {
             self.enviornmentName = envName
@@ -25,9 +29,12 @@ public class BDTests  {
     }
     
     /**
-     Creates a test
+     Creates a test. You can either add a JSON string or name of a locally stored JSON file that you want to use for stubbing
      
-     @param jsonString:String?, jsonFile:String?, httpCode:Int32
+     @param: jsonString:String?
+     @param: jsonFile:String?
+     @param: httpCode:Int32
+     
      @return Bool
      
      */
@@ -58,7 +65,7 @@ public class BDTests  {
     }
     
     /**
-     the ref variable is the string representation on the method that we want to call in order to set up test
+     the ref variable is the string representation on the method that we want to call in order to set up test.
      
      @param ref:String
      @return Bool
@@ -77,6 +84,7 @@ public class BDTests  {
      Reads the ref variable out of the clipboard in order to set up the test
      
      @param: None
+     
      @retrun: String?
      */
     public func readDatabaseData()->String?{
@@ -119,7 +127,7 @@ public class BDTests  {
     }
     
     /**
-     READ DATA FILE INTO STRING
+     Opens locally stored file and reads into a String
      
      @param: urlString:String
      @return:String?
@@ -138,7 +146,7 @@ public class BDTests  {
     }
     
     /**
-     READ CLIPBOARD
+     READ CLIPBOARD and remove it after reading
      
      1. http code
      2. json string?
@@ -183,7 +191,7 @@ public class BDTests  {
     }
     
     /**
-     CONVERT JSON TO DICTIONARY
+     CONVERT JSON STRING TO DICTIONARY
      
      @param: textString
      @return: [String:Any]?
