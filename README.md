@@ -26,21 +26,16 @@ This is a framework that is intended to simplify stubbing of network requests wh
 ## Set Up
 In your AppDelegate you need to import BDtests and add the testEnv method to your AppDelegate.
 
-`
-	import BDTests
-`
+`import BDTests`
 
 
-` 
-
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+` func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         //CHECK AND SET UP TESTS 
         _ = BDTestsEnv().testEnv()
 
         return true
-    }
-`
+    }`
 
 ## Network Tests 
 `Create an instance of BDTests: let test = BDTests(enviornment:nil)
@@ -54,23 +49,20 @@ This test will intercept the call made by your app to a server and return the JS
 
 ## How to stub multiple requests
 In cases where you want to do multiple requests simply create a 2nd test with a different enviornment name:
-`
-	 	//TEST 1
+`		//TEST 1
 	 	let sut = BDTests(enviornment:nil)
-        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
-        
-        //TEST 2
+        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)`
+
+`		 //TEST 2
         sut.enviornmentName = "test-2"
-        let test2 = sut.createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)
-        
-`
+        let test2 = sut.createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)`
 
 ## Setting up your app's state for a test
 If you want to to some set up prior to running your test that is not related to networking, for example seeding your database with some specific data follow these steps:
 
   1. In your apps code create an extension of BDTestsHelper and add a method to do whatever set up you need doen here.
-`
- 	import Foundation
+
+`	import Foundation
 	import BDTests
 
 	extension BDTestsHelper {
@@ -80,13 +72,11 @@ If you want to to some set up prior to running your test that is not related to 
 			//DO SOME SET UP HERE
 
 		}
-	}
-`
+	}`
 
 2. In your test code call the seedDatabase method and pass the name of your method that you wnat to call as a String value
-`
-	let seeded =  sut.seedDatabase(ref: "setUpMethod")
-`
+
+`let seeded =  sut.seedDatabase(ref: "setUpMethod")`
 
 ## Author
 
