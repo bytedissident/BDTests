@@ -62,7 +62,7 @@ In cases where you want to do multiple requests simply create a 2nd test with a 
 
 ```ruby
 //TEST 1
-	let sut = BDTests(enviornment:nil)
+let sut = BDTests(enviornment:nil)
 let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
 
 //TEST 2
