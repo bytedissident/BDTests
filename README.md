@@ -41,9 +41,16 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 
 ## Network Tests 
-`Create an instance of BDTests: let test = BDTests(enviornment:nil)
+`Create an instance of BDTests: 
+```ruby
+let test = BDTests(enviornment:nil)
+```
 If you pass nil in the initializer BDTests will use a default name (String) as your enviornment name. This is usually fine.
-next create a test: test.createTest(jsonString:nil, jsonFile:"stub-file",httpCode:200)
+next create a test: 
+
+```ruby
+test.createTest(jsonString:nil, jsonFile:"stub-file",httpCode:200)
+```
 
 createTest will either accept a JSON string or the name of a file that needs to live in the main bundle of your app. In either case this will be the JSON that is stubbed as a response from the call that your app will make to your server. Finally provide the HTTP Response code you desire to test.
 
