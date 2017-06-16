@@ -29,7 +29,7 @@ In your AppDelegate you need to import BDtests and add the testEnv method to you
 `import BDTests`
 
 
-` func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+`func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         //CHECK AND SET UP TESTS 
         _ = BDTestsEnv().testEnv()
@@ -49,11 +49,11 @@ This test will intercept the call made by your app to a server and return the JS
 
 ## How to stub multiple requests
 In cases where you want to do multiple requests simply create a 2nd test with a different enviornment name:
-`		//TEST 1
+		`//TEST 1
 	 	let sut = BDTests(enviornment:nil)
         let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)`
 
-`		 //TEST 2
+		`//TEST 2
         sut.enviornmentName = "test-2"
         let test2 = sut.createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)`
 
@@ -62,10 +62,9 @@ If you want to to some set up prior to running your test that is not related to 
 
   1. In your apps code create an extension of BDTestsHelper and add a method to do whatever set up you need doen here.
 
-`	import Foundation
-	import BDTests
+	`import BDTests `
 
-	extension BDTestsHelper {
+	`extension BDTestsHelper {
 
 		func setUpMethod(){
 
