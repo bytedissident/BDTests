@@ -83,7 +83,9 @@ extension BDTestsHelper {
 
 2. In your test code call the seedDatabase method and pass the name of your method that you wnat to call as a String value
 
-`let seeded =  sut.seedDatabase(ref: "setUpMethod")`
+```ruby
+let seeded =  sut.seedDatabase(ref: "setUpMethod")
+```
 
 ## Author
 
