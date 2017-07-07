@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BDTests'
-  s.version          = '0.0.4'
+  s.version          = '0.0.5'
   s.summary          = 'A Swift UITesting framework. Intended to simplify stubbing UITests'
 
 # This description is used to generate tags and improve search results.

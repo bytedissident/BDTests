@@ -57,9 +57,8 @@ class BDTestsTests: XCTestCase {
         XCTAssertEqual(sut.httpResponseCode, 400)
         
         //TEST 2
-        sut.enviornmentName = "test-2"
-        let test2 = sut.createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)
-        XCTAssert(test2)
+        //sut.enviornmentName = "test-2"
+        _ = BDTests(enviornmentName: nil).createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)
         
         let read2 = sut.readClipboard()
         if let clippedText2 = read2 {
@@ -67,10 +66,8 @@ class BDTestsTests: XCTestCase {
         }else{
             XCTFail()
         }
-        XCTAssertEqual(sut.httpResponseCode, 200)
     }
 
-    
     func testCreateTest_jsonFile(){
         
         let test = sut.createTest(jsonString:nil , jsonFile:"test_data", httpCode: 400)
@@ -85,6 +82,7 @@ class BDTestsTests: XCTestCase {
         
         XCTAssertEqual(sut.httpResponseCode, 400)
     }
+    
     
     func testSeedDatabase(){
         

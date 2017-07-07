@@ -9,19 +9,15 @@
 import UIKit
 import OHHTTPStubs
 
+
 public class BDTests  {
     
-    /**
-        DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
-     */
-     public var enviornmentName = "BD-UI-TEST"
+    //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
+    public var enviornmentName = "BD-UI-TEST"
     
-    /**
-        DEFAULT HTTP RESPONSE CODE TO 200
-     */
-     public var httpResponseCode:Int32 = 200
+    //DEFAULT HTTP RESPONSE CODE TO 200
+    public var httpResponseCode:Int32 = 200
     
-    /** */
     public init(enviornmentName:String?){
         if let envName = enviornmentName {
             self.enviornmentName = envName
@@ -29,12 +25,9 @@ public class BDTests  {
     }
     
     /**
-     Creates a test. You can either add a JSON string or name of a locally stored JSON file that you want to use for stubbing
+     Creates a test
      
-     @param: jsonString:String?
-     @param: jsonFile:String?
-     @param: httpCode:Int32
-     
+     @param jsonString:String?, jsonFile:String?, httpCode:Int32
      @return Bool
      
      */
@@ -65,7 +58,7 @@ public class BDTests  {
     }
     
     /**
-     the ref variable is the string representation on the method that we want to call in order to set up test.
+     the ref variable is the string representation on the method that we want to call in order to set up test
      
      @param ref:String
      @return Bool
@@ -84,7 +77,6 @@ public class BDTests  {
      Reads the ref variable out of the clipboard in order to set up the test
      
      @param: None
-     
      @retrun: String?
      */
     public func readDatabaseData()->String?{
@@ -107,7 +99,7 @@ public class BDTests  {
      
      @param: none
      @return : none
-    */
+     */
     public func removeTest(){
         self.removeStubs()
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName))
@@ -120,14 +112,14 @@ public class BDTests  {
      
      @param: none
      @return: none
-    */
+     */
     public func removeModelTest(){
         self.removeStubs()
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
     }
     
     /**
-     Opens locally stored file and reads into a String
+     READ DATA FILE INTO STRING
      
      @param: urlString:String
      @return:String?
@@ -146,7 +138,7 @@ public class BDTests  {
     }
     
     /**
-     READ CLIPBOARD and remove it after reading
+     READ CLIPBOARD
      
      1. http code
      2. json string?
@@ -158,6 +150,7 @@ public class BDTests  {
     public func readClipboard()->String?{
         
         let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: true)
+        print("READ CLIPBOARD \(self.enviornmentName)")
         
         if paste == nil { return nil }
         let clipString =  paste?.string
@@ -191,7 +184,7 @@ public class BDTests  {
     }
     
     /**
-     CONVERT JSON STRING TO DICTIONARY
+     CONVERT JSON TO DICTIONARY
      
      @param: textString
      @return: [String:Any]?
@@ -244,11 +237,10 @@ public class BDTests  {
      */
     public func runTests()->Bool{
         
-        guard let json = self.readClipboard() else { assert(false); return false }
-        guard let dict = self.convertToDictionary(text: json) else { assert(false); return false }
-        guard let responseText = self.determineResponseText(dict:dict) else { assert(false); return false }
-        guard let httpCode = dict["code"] else { assert(false); return false }
-        guard let code =  httpCode as? Int32 else { assert(false); return false }
+        let data = readData()
+        if data.code == 0 { return false }
+        let code = data.code
+        let responseText = data.response
         
         stub(condition: isMethodGET()) { request -> OHHTTPStubsResponse in
             let stubData = responseText.data(using: String.Encoding.utf8)
@@ -275,6 +267,18 @@ public class BDTests  {
             return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
         }
         return true
+    }
+    
+    func readData()->(code:Int32,response:String){
+        
+        let resp = (code:Int32(0),response:"")
+        guard let json = self.readClipboard() else { assert(false); return resp }
+        guard let dict = self.convertToDictionary(text: json) else { assert(false); return resp }
+        guard let responseText = self.determineResponseText(dict:dict) else { assert(false); return resp }
+        guard let httpCode = dict["code"] else { assert(false); return resp }
+        guard let code =  httpCode as? Int32 else { assert(false); return resp }
+        
+        return (code:code,response:responseText)
     }
     
     /**
