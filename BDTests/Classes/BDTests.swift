@@ -32,7 +32,10 @@ public class BDTests  {
      
      */
     public func createTest(jsonString:String?,jsonFile:String?,httpCode:Int32)->Bool{
-        print("CREATE TEST")
+        
+        //CLEAR 
+        UIPasteboard.general.string = ""
+        
         var created = false
         
         //SET THE HTTP RESPONSE CODE
@@ -149,16 +152,15 @@ public class BDTests  {
      */
     public func readClipboard()->String?{
         
-        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: true)
-        print("READ CLIPBOARD \(self.enviornmentName)")
+        let paste =  UIPasteboard.general.string
         
         if paste == nil { return nil }
-        let clipString =  paste?.string
-        
+        //print("READ CLIPBOARD \(clipString )")
         //clean clipboard
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName))
+        UIPasteboard.general.string = ""
         
-        return clipString
+        //print(clipString)
+        return paste
         
     }
     
@@ -174,12 +176,8 @@ public class BDTests  {
      @return: Bool
      */
     public func setClipboard(json:String)->Bool{
-        
-        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: true)
-        paste?.string = ""
-        paste?.string = json
-        
-        if paste == nil { return false }
+    
+        UIPasteboard.general.string = json
         return true
     }
     
@@ -237,34 +235,69 @@ public class BDTests  {
      */
     public func runTests()->Bool{
         
-        let data = readData()
-        if data.code == 0 { return false }
-        let code = data.code
-        let responseText = data.response
-        
         stub(condition: isMethodGET()) { request -> OHHTTPStubsResponse in
-            let stubData = responseText.data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            let data = self.readData()
+            if data.code > 0 {
+                let code = data.code
+                let responseText = data.response
+                //print(responseText)
+                let stubData = responseText.data(using: String.Encoding.utf8)
+                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            }else {
+                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+            }
         }
         
         stub(condition: isMethodPOST()) { request -> OHHTTPStubsResponse in
-            let stubData = responseText.data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            let data = self.readData()
+            if data.code > 0 {
+                let code = data.code
+                let responseText = data.response
+                //print(responseText)
+                let stubData = responseText.data(using: String.Encoding.utf8)
+                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            }else {
+                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+            }
         }
         
         stub(condition: isMethodPUT()) { request -> OHHTTPStubsResponse in
-            let stubData = responseText.data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            let data = self.readData()
+            if data.code > 0 {
+                let code = data.code
+                let responseText = data.response
+                //print(responseText)
+                let stubData = responseText.data(using: String.Encoding.utf8)
+                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            }else {
+                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+            }
         }
         
         stub(condition: isMethodPATCH()) { request -> OHHTTPStubsResponse in
-            let stubData = responseText.data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            let data = self.readData()
+            if data.code > 0 {
+                let code = data.code
+                let responseText = data.response
+                // print(responseText)
+                let stubData = responseText.data(using: String.Encoding.utf8)
+                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            }else {
+                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+            }
         }
         
         stub(condition: isMethodDELETE()) { request -> OHHTTPStubsResponse in
-            let stubData = responseText.data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            let data = self.readData()
+            if data.code > 0 {
+                let code = data.code
+                let responseText = data.response
+                //print(responseText)
+                let stubData = responseText.data(using: String.Encoding.utf8)
+                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+            }else {
+                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+            }
         }
         return true
     }
@@ -272,11 +305,11 @@ public class BDTests  {
     func readData()->(code:Int32,response:String){
         
         let resp = (code:Int32(0),response:"")
-        guard let json = self.readClipboard() else { assert(false); return resp }
-        guard let dict = self.convertToDictionary(text: json) else { assert(false); return resp }
-        guard let responseText = self.determineResponseText(dict:dict) else { assert(false); return resp }
-        guard let httpCode = dict["code"] else { assert(false); return resp }
-        guard let code =  httpCode as? Int32 else { assert(false); return resp }
+        guard let json = self.readClipboard() else { return resp }
+        guard let dict = self.convertToDictionary(text: json) else { return resp }
+        guard let responseText = self.determineResponseText(dict:dict) else { return resp }
+        guard let httpCode = dict["code"] else { return resp }
+        guard let code =  httpCode as? Int32 else { return resp }
         
         return (code:code,response:responseText)
     }
@@ -297,10 +330,14 @@ public class BDTests  {
      */
     public func isTest()->Bool{
         
-        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName), create: false)
-        if paste?.string != nil {
+        let paste = UIPasteboard.general.string
+        if let pasteString = paste {
             
-            return true
+            if pasteString.characters.count > 0 {
+                return true
+            }
+            
+            return false
         }
         return false
     }

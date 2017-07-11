@@ -8,6 +8,9 @@
 
 import XCTest
 
+
+@testable import BDTestsUnitTests
+
 class BDTestsUnitTestsUITests: XCTestCase {
         
     override func setUp() {
@@ -18,7 +21,7 @@ class BDTestsUnitTestsUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
+        //XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
@@ -28,9 +31,26 @@ class BDTestsUnitTestsUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testMultiStub(){
+    
+        let bdTests = BDTests(enviornmentName: nil)
+        _ = bdTests.createTest(jsonString: "{\"key\":\"value\"}", jsonFile: nil, httpCode: 200)
+        //UIPasteboard.general.string = "Hello world"
+        
+        
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["One"].tap()
+        
+ 
+        //UIPasteboard.general.string = "Hello world 2"
+        _ = bdTests.createTest(jsonString: "{\"key\":\"value 2\"}", jsonFile: nil, httpCode: 200)
+        //bdTests.setClipboard(json: "{\"key\":\"value 2\"}")
+        
+         app.buttons["One"].tap()
+        //app.buttons["Submit"].tap()
+        
+        
     }
     
 }

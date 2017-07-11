@@ -117,8 +117,8 @@ class BDTestsTests: XCTestCase {
         let paste = sut.setClipboard(json: "{\"key\":\"value\"}")
         XCTAssert(paste)
         
-        let  readPaste = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName), create: false)
-        if let myString = readPaste?.string {
+        let  readPaste = UIPasteboard.general.string
+        if let myString = readPaste {
            XCTAssertEqual(myString, "{\"key\":\"value\"}")
         }else{
             XCTFail()
@@ -131,8 +131,8 @@ class BDTestsTests: XCTestCase {
         let paste = sut.setClipboard(json: "{\"key\":\"value\"}")
         XCTAssert(paste)
         
-        let  readPaste = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName), create: false)
-        if let myString = readPaste?.string {
+        let  readPaste = UIPasteboard.general.string
+        if let myString = readPaste {
             XCTAssertEqual(myString, "{\"key\":\"value\"}")
         }else{
             XCTFail()
@@ -147,7 +147,7 @@ class BDTestsTests: XCTestCase {
         }
         //CLIPBOARD SHOULD BE CLEAR AFTER READ
         let readAgain = sut.readClipboard()
-        XCTAssertNil(readAgain)
+        XCTAssertEqual(readAgain, "")
     }
     
     func testConvertToDictionary(){
@@ -165,7 +165,7 @@ class BDTestsTests: XCTestCase {
     
     func testIsTest_false(){ 
         //SET UP
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: sut.enviornmentName))
+        UIPasteboard.general.string = ""
         XCTAssertFalse(sut.isTest())
     
         
@@ -173,7 +173,7 @@ class BDTestsTests: XCTestCase {
     
     func testIsTest_true(){
         //SET UP
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: sut.enviornmentName))
+        UIPasteboard.general.string = ""
         XCTAssertFalse(sut.isTest())
         
         //TEST

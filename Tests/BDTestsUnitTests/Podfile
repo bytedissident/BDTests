@@ -6,7 +6,8 @@ target 'BDTestsUnitTests' do
   use_frameworks!
 
   # Pods for BDTestsUnitTests
-   pod 'OHHTTPStubs' # Default subspecs, including support for NSURLSession & JSON etc
+  pod 'Alamofire', '~> 4.0'
+  pod 'OHHTTPStubs' # Default subspecs, including support for NSURLSession & JSON etc
   pod 'OHHTTPStubs/Swift' # Adds the Swiftier API wrapper too
 
   target 'BDTestsUnitTestsTests' do
@@ -17,6 +18,9 @@ target 'BDTestsUnitTests' do
   target 'BDTestsUnitTestsUITests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Alamofire', '~> 4.0'
+    pod 'OHHTTPStubs' # Default subspecs, including support for NSURLSession & JSON etc
+    pod 'OHHTTPStubs/Swift' # Adds the Swiftier API wrapper too
   end
 
 end
