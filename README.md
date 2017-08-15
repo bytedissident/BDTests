@@ -88,7 +88,7 @@ extension BDTestsHelper {
 }
 ```
 
-2. In your test code call the seedDatabase method and pass the name of your method that you wnat to call as a String value
+2. In your test code call the seedDatabase method and pass the name of your method that you want to call as a String value. GOTCHA!! You must do this prior to XCUIApplication().launch() being called or it will be ignored.
 
 ```ruby
 let seeded =  sut.seedDatabase(ref: "setUpMethod")
