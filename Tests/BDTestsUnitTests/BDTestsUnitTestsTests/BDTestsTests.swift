@@ -26,21 +26,7 @@ class BDTestsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCreateTest_jsonString(){
-        
-        let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
-        XCTAssert(test)
-        
-        let read = sut.readClipboard()
-        if let clippedText = read {
-            XCTAssertEqual(clippedText, "{\"code\":400,\"data\":{\"key\":\"value\"}}")
-        }else{
-            XCTFail()
-        }
-        
-        XCTAssertEqual(sut.httpResponseCode, 400)
-    }
-    
+       
     func testCreateTest_jsonString_multipleStubs(){
         
         //TEST 1
@@ -216,21 +202,24 @@ class BDTestsTests: XCTestCase {
     
     func testSeedDatabase_(){
         
-        let json = "{\"key\":\"value\"}"
+        UIPasteboard.general.setItems([[:]], options: [:])
+        let json = "one"
         let modelData = sut.seedDatabase(ref: json)
         XCTAssert(modelData)
         
-        let  readPaste = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName+"-model"), create: false)
-        if let myString = readPaste?.string {
-            XCTAssertEqual(myString, "{\"key\":\"value\"}")
-        }else{
-            XCTFail()
-        }
+        guard let db = sut.readDatabaseData() else { XCTFail(); return }
+        XCTAssertEqual(db, "one")
+        
+        _ = sut.seedDatabase(ref: "two")
+        
+        guard let db2 = sut.readDatabaseData() else { XCTFail(); return }
+        XCTAssertEqual(db2, "two")
     }
     
     
     func testReadDatabaseData(){
         
+        UIPasteboard.general.setItems([[:]], options: [:])
         let json = "{\"key\":\"value\"}"
         let modelData = sut.seedDatabase(ref: json)
         XCTAssert(modelData)
@@ -238,8 +227,6 @@ class BDTestsTests: XCTestCase {
         guard let  db = sut.readDatabaseData() else { XCTFail(); return }
         XCTAssertEqual(db,"{\"key\":\"value\"}")
         
-        let  db2 = sut.readDatabaseData()
-        XCTAssertNil(db2)
     }
     
     func testIsModelTest_false(){
@@ -250,7 +237,6 @@ class BDTestsTests: XCTestCase {
     
     func testIsModelTest_true(){
         //SET UP
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: sut.enviornmentName+"-model"))
         XCTAssertFalse(sut.isModelTest())
         
         //TEST

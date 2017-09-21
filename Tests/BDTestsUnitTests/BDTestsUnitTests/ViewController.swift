@@ -9,13 +9,23 @@
 import UIKit
 import Alamofire
 
+extension BDTestsHelper {
+
+    public func testMethod(){
+        
+        UserDefaults.standard.set("test-string", forKey: "test-string")
+    }
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var testText: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        testText.text = "HELLO"
+        if let testString = UserDefaults.standard.value(forKey: "test-string") as? String{
+            testText.text = testString
+        }
         testText.accessibilityLabel = "HELLO"
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -34,7 +44,6 @@ class ViewController: UIViewController {
         
         self.testText.text = "TRY"
         Alamofire.request("http://test.com",headers:nil).responseJSON { response in
-            print(response.value)
             if let data = response.value {
                 if let d = data as? [String:AnyObject]{
                     

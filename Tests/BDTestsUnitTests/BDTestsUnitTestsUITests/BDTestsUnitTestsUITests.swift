@@ -27,6 +27,7 @@ class BDTestsUnitTestsUITests: XCTestCase {
       
         let bdTests = BDTests(enviornmentName: nil)
         _ = bdTests.createTest(jsonString: "{\"key\":\"value\"}", jsonFile: nil, httpCode: 200)
+        _ = bdTests.seedDatabase(ref: "testMethod")
         //UIPasteboard.general.string = "Hello world"
         
         
@@ -44,4 +45,67 @@ class BDTestsUnitTestsUITests: XCTestCase {
         
     }
     
+    func testMultiStub_testTwice(){
+        
+        let bdTests = BDTests(enviornmentName: nil)
+        _ = bdTests.createTest(jsonString: "{\"key\":\"value\"}", jsonFile: nil, httpCode: 200)
+        _ = bdTests.seedDatabase(ref: "testMethod")
+        //UIPasteboard.general.string = "Hello world"
+        
+        
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["One"].tap()
+        
+        
+        //UIPasteboard.general.string = "Hello world 2"
+        _ = bdTests.createTest(jsonString: "{\"key\":\"value 2\"}", jsonFile: nil, httpCode: 200)
+        //bdTests.setClipboard(json: "{\"key\":\"value 2\"}")
+        
+        app.buttons["One"].tap()
+        //app.buttons["Submit"].tap()
+        
+    }
+    
+    func testMultiStub_dataFile(){
+        
+        let bdTests = BDTests(enviornmentName: nil)
+        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
+        //UIPasteboard.general.string = "Hello world"
+        _ = bdTests.seedDatabase(ref: "testMethod")
+        
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["One"].tap()
+        
+        
+        //UIPasteboard.general.string = "Hello world 2"
+        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
+        //bdTests.setClipboard(json: "{\"key\":\"value 2\"}")
+        
+        app.buttons["One"].tap()
+        //app.buttons["Submit"].tap()
+        
+    }
+    
+    func testMultiStub_testTwice_dataFile(){
+        
+        let bdTests = BDTests(enviornmentName: nil)
+        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
+        //UIPasteboard.general.string = "Hello world"
+        _ = bdTests.seedDatabase(ref: "testMethod")
+        
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["One"].tap()
+        
+        
+        //UIPasteboard.general.string = "Hello world 2"
+        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
+        //bdTests.setClipboard(json: "{\"key\":\"value 2\"}")
+        
+        app.buttons["One"].tap()
+        //app.buttons["Submit"].tap()
+        
+    }
 }

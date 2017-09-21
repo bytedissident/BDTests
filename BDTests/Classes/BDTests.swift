@@ -24,6 +24,7 @@ public class BDTests  {
         }
     }
     
+    
     /**
      Creates a test
      
@@ -33,8 +34,8 @@ public class BDTests  {
      */
     public func createTest(jsonString:String?,jsonFile:String?,httpCode:Int32)->Bool{
         
-        //CLEAR 
-        UIPasteboard.general.string = ""
+        //CLEAR
+        //UIPasteboard.general.setValue(nil, forKey: "data")
         
         var created = false
         
@@ -68,11 +69,24 @@ public class BDTests  {
      */
     public func seedDatabase(ref:String)->Bool{
         
-        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
-        paste?.string = ""
-        paste?.string = ref
+        //CLEAR
+        let currentItems = UIPasteboard.general.items
+        var newItems = [[String:Any]]()
+        for item in currentItems{
+            if let _ = item["model"] {
+                
+            }else{
+                newItems.append(item)
+            }
+        }
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+        }
+        newItems.append(["model":ref])
+        UIPasteboard.general.addItems(newItems)
         
-        if paste == nil { return false }
         return true
     }
     
@@ -84,16 +98,16 @@ public class BDTests  {
      */
     public func readDatabaseData()->String?{
         
-        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: true)
-        if paste == nil { return nil }
-        let string = paste?.string
-        //guard let json = paste?.string else { return nil }
-        //guard let dict = self.convertToDictionary(text: json) else { return nil }
+        let items =  UIPasteboard.general.items
+        for item in items {
+            if let model = item["model"]  {
+                guard let modelData = model as? Data else { return nil }
+                guard let methodName = String(data: modelData, encoding: .utf8) else { return nil }
+                return methodName
+            }
+        }
         
-        //CLEAR CLIPBOARD
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
-        
-        return string
+        return nil
     }
     
     
@@ -152,16 +166,16 @@ public class BDTests  {
      */
     public func readClipboard()->String?{
         
-        let paste =  UIPasteboard.general.string
+        let items =  UIPasteboard.general.items
+        for item in items {
+            if let model = item["data"]  {
+                guard let modelData = model as? Data else { return nil }
+                guard let methodName = String(data: modelData, encoding: .utf8) else { return nil }
+                return methodName
+            }
+        }
         
-        if paste == nil { return nil }
-        //print("READ CLIPBOARD \(clipString )")
-        //clean clipboard
-        UIPasteboard.general.string = ""
-        
-        //print(clipString)
-        return paste
-        
+        return nil
     }
     
     /**
@@ -176,8 +190,24 @@ public class BDTests  {
      @return: Bool
      */
     public func setClipboard(json:String)->Bool{
-    
-        UIPasteboard.general.string = json
+        
+        //CLEAR
+        let currentItems = UIPasteboard.general.items
+        var newItems = [[String:Any]]()
+        for item in currentItems{
+            if let _ = item["data"] {
+                
+            }else{
+                newItems.append(item)
+            }
+        }
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+        }
+        newItems.append(["data":json])
+        UIPasteboard.general.addItems(newItems)
         return true
     }
     
@@ -330,18 +360,9 @@ public class BDTests  {
      */
     public func isTest()->Bool{
         
-        let paste = UIPasteboard.general.string
-        if let pasteString = paste {
-            
-            if pasteString.characters.count > 0 {
-                return true
-            }
-            
-            return false
-        }
-        return false
+        if readClipboard() == nil { return false }
+        return true
     }
-    
     
     /**
      HAS MODEL TEST
@@ -350,11 +371,7 @@ public class BDTests  {
      */
     public func isModelTest()->Bool{
         
-        let paste = UIPasteboard(name: UIPasteboardName(rawValue: self.enviornmentName+"-model"), create: false)
-        if paste?.string != nil {
-            
-            return true
-        }
-        return false
+        if readDatabaseData() == nil { return false }
+        return true
     }
 }

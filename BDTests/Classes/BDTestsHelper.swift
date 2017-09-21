@@ -13,7 +13,4 @@ open class BDTestsHelper:NSObject {
     
     public override init(){}
 
-    public func testMethod(){
-        print("Test Method")
-    }
 }
