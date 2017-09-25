@@ -176,7 +176,7 @@ public class BDTests  {
      @return: Bool
      */
     public func setClipboard(json:String)->Bool{
-    
+        
         UIPasteboard.general.string = json
         return true
     }
@@ -357,4 +357,49 @@ public class BDTests  {
         }
         return false
     }
+    
+    /*
+     Tests if there's a memroy leak
+     - parameter: sut: a View Controller that will get tests
+     */
+    public func checkMemoryLeak(inout sut:UIViewController) {
+        var sut  = UIViewController
+        weak var weakSut = sut
+        sut = nil
+        XCTAssertNil(weakSut)
+    }
+    
+    /*
+     Tests Fatal Error
+     - parameter: expectedMessage: the expected message of the fatar errorError
+     - parameter: testCase: callBack
+     - return: a callback
+     */
+    public func checkFatalError(expectedMessage: String, testcase: @escaping () -> Void) {
+        
+        let expectation = self.expectation(description: "expectingFatalError")
+        var assertionMessage: String? = nil
+        
+        FatalErrorUtil.replaceFatalError { message, _, _ in
+            assertionMessage = message
+            expectation.fulfill()
+            self.unreachable()
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async(execute: testcase)
+        
+        waitForExpectations(timeout: 2) { _ in
+            XCTAssertEqual(assertionMessage, expectedMessage)
+            
+            FatalErrorUtil.restoreFatalError()
+        }
+    }
+    
+    
+    func unreachable() -> Never {
+        repeat {
+            RunLoop.current.run()
+        } while (true)
+    }
+    
 }
