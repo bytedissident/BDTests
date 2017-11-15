@@ -13,6 +13,7 @@ extension BDTestsHelper {
 
     public func testMethod(){
         
+        print("DATA BASE METHOD CALLED")
         UserDefaults.standard.set("test-string", forKey: "test-string")
     }
 }
@@ -25,9 +26,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         if let testString = UserDefaults.standard.value(forKey: "test-string") as? String{
             testText.text = testString
+        }else{
+            print("NO DATA BASE INTERACTION")
         }
         testText.accessibilityLabel = "HELLO"
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {

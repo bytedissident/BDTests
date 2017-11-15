@@ -229,6 +229,43 @@ class BDTestsTests: XCTestCase {
         
     }
     
+    func testRemoveTest(){
+        
+        //BASELINE
+        UIPasteboard.general.items = [[:]]
+        let json = "{\"key\":\"value\"}"
+        let data = sut.setClipboard(json: json)
+        XCTAssert(data)
+        
+        guard let  db = sut.readClipboard() else { XCTFail(); return }
+        XCTAssertEqual(db,"{\"key\":\"value\"}")
+        
+        //TEST
+        sut.removeTest()
+        let  db2 = sut.readClipboard()
+        XCTAssertNil(db2)
+
+    
+    }
+    
+    func testRemoveModelTest(){
+    
+        //BASELINE
+        UIPasteboard.general.items = [[:]]
+        let json = "{\"key\":\"value\"}"
+        let modelData = sut.seedDatabase(ref: json)
+        XCTAssert(modelData)
+        
+        guard let  db = sut.readDatabaseData() else { XCTFail(); return }
+        XCTAssertEqual(db,"{\"key\":\"value\"}")
+        
+        //TEST
+        sut.removeModelTest()
+        let  db2 = sut.readDatabaseData()
+        XCTAssertNil(db2)
+
+    }
+    
     func testIsModelTest_false(){
         //SET UP
         UIPasteboard.remove(withName: UIPasteboardName(rawValue: sut.enviornmentName+"-model"))
