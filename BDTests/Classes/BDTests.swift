@@ -9,6 +9,26 @@
 import UIKit
 import OHHTTPStubs
 
+public class Closure {
+    let closure: ()->()
+    
+    init (_ closure: @escaping ()->()) {
+        self.closure = closure
+    }
+    
+    @objc func invoke () {
+        closure()
+    }
+}
+
+extension UIControl {
+    public func add (for controlEvents: UIControlEvents, _ closure: @escaping ()->()) {
+        let sleeve = Closure(closure)
+        addTarget(sleeve, action: #selector(Closure.invoke), for: controlEvents)
+        objc_setAssociatedObject(self, String(format: "[%d]", arc4random()), sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+    }
+}
+
 
 public class BDTests  {
     

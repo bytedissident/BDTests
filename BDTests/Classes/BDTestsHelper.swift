@@ -8,9 +8,13 @@
 
 import Foundation
 
-//EXTEND THIS CLASS TO PREP APP FOR TESTS
-open class BDTestsHelper:NSObject {
+
+public class BDTestsHelper:NSObject {
     
+    let bdTestsEnv = BDTestsEnv()
     public override init(){}
 
+    public func testMethod(){
+        print("Test Method")
+    }
 }
