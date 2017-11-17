@@ -9,6 +9,26 @@
 import UIKit
 import OHHTTPStubs
 
+public class Closure {
+    let closure: ()->()
+    
+    init (_ closure: @escaping ()->()) {
+        self.closure = closure
+    }
+    
+    @objc func invoke () {
+        closure()
+    }
+}
+
+extension UIControl {
+    public func add (for controlEvents: UIControlEvents, _ closure: @escaping ()->()) {
+        let sleeve = Closure(closure)
+        addTarget(sleeve, action: #selector(Closure.invoke), for: controlEvents)
+        objc_setAssociatedObject(self, String(format: "[%d]", arc4random()), sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+    }
+}
+
 
 public class BDTests  {
     
@@ -28,9 +48,11 @@ public class BDTests  {
     /**
      Creates a test
      
-     @param jsonString:String?, jsonFile:String?, httpCode:Int32
-     @return Bool
+     - parameter jsonString: String?
+     - parameter jsonFile:String?
+     - parameter httpCode:Int32
      
+     - return: Bool
      */
     public func createTest(jsonString:String?,jsonFile:String?,httpCode:Int32)->Bool{
         
@@ -62,10 +84,13 @@ public class BDTests  {
     }
     
     /**
-     the ref variable is the string representation on the method that we want to call in order to set up test
+     ==== BASE ====
+     The ref variable is the string representation on the method that we want to call in order to set up test
+     ==== BASE ====
      
-     @param ref:String
-     @return Bool
+     - parameter ref: String
+     
+     - return: Bool
      */
     public func seedDatabase(ref:String)->Bool{
         
@@ -79,11 +104,8 @@ public class BDTests  {
                 newItems.append(item)
             }
         }
-        if #available(iOS 10.0, *) {
-            UIPasteboard.general.setItems([[:]], options: [:])
-        } else {
-            // Fallback on earlier versions
-        }
+        
+        //removeModelTest()
         newItems.append(["model":ref])
         UIPasteboard.general.addItems(newItems)
         
@@ -93,8 +115,7 @@ public class BDTests  {
     /**
      Reads the ref variable out of the clipboard in order to set up the test
      
-     @param: None
-     @retrun: String?
+     - retrun: String?
      */
     public func readDatabaseData()->String?{
         
@@ -103,6 +124,8 @@ public class BDTests  {
             if let model = item["model"]  {
                 guard let modelData = model as? Data else { return nil }
                 guard let methodName = String(data: modelData, encoding: .utf8) else { return nil }
+                
+                //removeModelTest()
                 return methodName
             }
         }
@@ -114,33 +137,57 @@ public class BDTests  {
     /**
      Removes all tests. Removes:stubs, pasteboards
      
-     @param: none
-     @return : none
+     - return: none
      */
     public func removeTest(){
-        self.removeStubs()
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName))
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
+        
+        let currentItems = UIPasteboard.general.items
+        var newItems = [[String:Any]]()
+        for item in currentItems{
+            if let _ = item["data"] {
+                
+            }else{
+                newItems.append(item)
+            }
+        }
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            UIPasteboard.general.items = [[:]]
+        }
+        UIPasteboard.general.addItems(newItems)
     }
     
     
     /**
      removes a model test and stubs
      
-     @param: none
-     @return: none
      */
     public func removeModelTest(){
-        self.removeStubs()
-        UIPasteboard.remove(withName: UIPasteboardName(rawValue: self.enviornmentName+"-model"))
+        
+        let currentItems = UIPasteboard.general.items
+        var newItems = [[String:Any]]()
+        for item in currentItems{
+            if let _ = item["model"] {
+                
+            }else{
+                newItems.append(item)
+            }
+        }
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+            UIPasteboard.general.items = [[:]]
+        }
+        UIPasteboard.general.addItems(newItems)
     }
     
     /**
      READ DATA FILE INTO STRING
      
-     @param: urlString:String
-     @return:String?
-     
+     - parameter: urlString:String
+     - return: String?
      */
     public func openFileAndReadIntoString(urlString:String)->String?{
         if let dir = Bundle.main.path(forResource: urlString, ofType:"json"){
@@ -161,8 +208,7 @@ public class BDTests  {
      2. json string?
      3. json file
      
-     @param: none
-     @return String?
+     - return: String?
      */
     public func readClipboard()->String?{
         
@@ -171,6 +217,7 @@ public class BDTests  {
             if let model = item["data"]  {
                 guard let modelData = model as? Data else { return nil }
                 guard let methodName = String(data: modelData, encoding: .utf8) else { return nil }
+                //removeTest()
                 return methodName
             }
         }
@@ -182,12 +229,13 @@ public class BDTests  {
      SET CLIPBOARD
      pass json into clipboard for later review
      
-     
      1. http code
      2. json string?
      3. json file
      
-     @return: Bool
+     - parameter json:String
+     - return: Bool
+     
      */
     public func setClipboard(json:String)->Bool{
         
@@ -201,11 +249,7 @@ public class BDTests  {
                 newItems.append(item)
             }
         }
-        if #available(iOS 10.0, *) {
-            UIPasteboard.general.setItems([[:]], options: [:])
-        } else {
-            // Fallback on earlier versions
-        }
+        removeTest()
         newItems.append(["data":json])
         UIPasteboard.general.addItems(newItems)
         return true
@@ -214,8 +258,8 @@ public class BDTests  {
     /**
      CONVERT JSON TO DICTIONARY
      
-     @param: textString
-     @return: [String:Any]?
+     - parameter text:String
+     - return: [String:Any]?
      */
     public func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
@@ -230,10 +274,10 @@ public class BDTests  {
     
     
     /**
-     DETERMINE RESOPNSE TEXT
+     DETERMINE RESPONSE TEXT
      
-     @param: dict[String:Any]
-     @return: String?
+     - parameter dict[String:Any]
+     - return: String?
      */
     public func determineResponseText(dict:[String:Any])->String?{
         
@@ -347,7 +391,7 @@ public class BDTests  {
     /**
      REMOVE STUBS
      
-     @return: none
+     - return: none
      */
     public func removeStubs(){
         OHHTTPStubs.removeAllStubs()
@@ -356,7 +400,8 @@ public class BDTests  {
     /**
      IS TEST
      
-     @return: Bool
+     - return: Bool
+     
      */
     public func isTest()->Bool{
         
@@ -367,7 +412,8 @@ public class BDTests  {
     /**
      HAS MODEL TEST
      
-     @return: Bool
+     - return: Bool
+     
      */
     public func isModelTest()->Bool{
         
