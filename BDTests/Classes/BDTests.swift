@@ -75,6 +75,7 @@ public class BDTests  {
     public func seedDatabase(ref:String)->Bool{
         
         //CLEAR
+        removeModelTest()
         let currentItems = UIPasteboard.general.items
         var newItems = [[String:Any]]()
         for item in currentItems{
@@ -84,8 +85,6 @@ public class BDTests  {
                 newItems.append(item)
             }
         }
-        
-        //removeModelTest()
         newItems.append(["model":ref])
         UIPasteboard.general.addItems(newItems)
         
@@ -104,12 +103,9 @@ public class BDTests  {
             if let model = item["model"]  {
                 guard let modelData = model as? Data else { return nil }
                 guard let methodName = String(data: modelData, encoding: .utf8) else { return nil }
-                
-                //removeModelTest()
                 return methodName
             }
         }
-        
         return nil
     }
     
@@ -197,7 +193,6 @@ public class BDTests  {
             if let model = item["data"]  {
                 guard let modelData = model as? Data else { return nil }
                 guard let methodName = String(data: modelData, encoding: .utf8) else { return nil }
-                //removeTest()
                 return methodName
             }
         }
@@ -220,16 +215,17 @@ public class BDTests  {
     public func setClipboard(json:String)->Bool{
         
         //CLEAR
+        removeTest()
         let currentItems = UIPasteboard.general.items
         var newItems = [[String:Any]]()
         for item in currentItems{
             if let _ = item["data"] {
-                
+                //newItems.append(item)
             }else{
                 newItems.append(item)
             }
         }
-        removeTest()
+        
         newItems.append(["data":json])
         UIPasteboard.general.addItems(newItems)
         return true
@@ -352,6 +348,30 @@ public class BDTests  {
             }else {
                 return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
             }
+        }
+        return true
+    }
+    
+    public func runTestsAs200()->Bool{
+        
+        stub(condition: isMethodGET()) { request -> OHHTTPStubsResponse in
+            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        }
+        
+        stub(condition: isMethodPOST()) { request -> OHHTTPStubsResponse in
+            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        }
+        
+        stub(condition: isMethodPUT()) { request -> OHHTTPStubsResponse in
+            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        }
+        
+        stub(condition: isMethodPATCH()) { request -> OHHTTPStubsResponse in
+            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        }
+        
+        stub(condition: isMethodDELETE()) { request -> OHHTTPStubsResponse in
+            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
         }
         return true
     }

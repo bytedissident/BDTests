@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6249DECF5BF2FDCB21BBC0E9 /* Pods_BDTestsUnitTestsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40A385F74F451C2185873C9 /* Pods_BDTestsUnitTestsUITests.framework */; };
 		872789BB1F1539550063BD51 /* BDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052E21ED360ED00A04704 /* BDTests.swift */; };
+		874258152007BDF000492400 /* BDTestsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874258142007BDF000492400 /* BDTestsUI.swift */; };
 		875052941ED3482100A04704 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052931ED3482100A04704 /* AppDelegate.swift */; };
 		875052961ED3482100A04704 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052951ED3482100A04704 /* ViewController.swift */; };
 		875052991ED3482100A04704 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 875052971ED3482100A04704 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		23F224DE5B0EF137414F3A08 /* Pods-BDTestsUnitTestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTestsUITests/Pods-BDTestsUnitTestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		728D0265EB100D0AF47FA432 /* Pods-BDTestsUnitTestsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTestsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTestsTests/Pods-BDTestsUnitTestsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		757095E08E96D66940B99A43 /* Pods_BDTestsUnitTestsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDTestsUnitTestsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		874258142007BDF000492400 /* BDTestsUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsUI.swift; sourceTree = "<group>"; };
 		875052901ED3482100A04704 /* BDTestsUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDTestsUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		875052931ED3482100A04704 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		875052951ED3482100A04704 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		875052B21ED3482100A04704 /* BDTestsUnitTestsUITests */ = {
 			isa = PBXGroup;
 			children = (
+				874258142007BDF000492400 /* BDTestsUI.swift */,
 				875052B31ED3482100A04704 /* BDTestsUnitTestsUITests.swift */,
 				875052B51ED3482100A04704 /* Info.plist */,
 			);
@@ -275,17 +278,19 @@
 				TargetAttributes = {
 					8750528F1ED3482100A04704 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = JG4TU5Z5P9;
+						DevelopmentTeam = Q953KSA8G4;
 						ProvisioningStyle = Automatic;
 					};
 					875052A31ED3482100A04704 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q953KSA8G4;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8750528F1ED3482100A04704;
 					};
 					875052AE1ED3482100A04704 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q953KSA8G4;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8750528F1ED3482100A04704;
 					};
@@ -505,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				874258152007BDF000492400 /* BDTestsUI.swift in Sources */,
 				875052B41ED3482100A04704 /* BDTestsUnitTestsUITests.swift in Sources */,
 				872789BB1F1539550063BD51 /* BDTests.swift in Sources */,
 			);
@@ -641,7 +647,7 @@
 			baseConfigurationReference = BEFB14F0E765A3E3205B17A4 /* Pods-BDTestsUnitTests.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JG4TU5Z5P9;
+				DEVELOPMENT_TEAM = Q953KSA8G4;
 				INFOPLIST_FILE = BDTestsUnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -656,7 +662,7 @@
 			baseConfigurationReference = EDB5F16B3B8C4AA4CB3D60FF /* Pods-BDTestsUnitTests.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JG4TU5Z5P9;
+				DEVELOPMENT_TEAM = Q953KSA8G4;
 				INFOPLIST_FILE = BDTestsUnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -673,6 +679,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = Q953KSA8G4;
 				INFOPLIST_FILE = BDTestsUnitTestsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedissident.bdtests.BDTestsUnitTestsTests;
@@ -691,6 +698,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = Q953KSA8G4;
 				INFOPLIST_FILE = BDTestsUnitTestsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedissident.bdtests.BDTestsUnitTestsTests;
@@ -706,6 +714,7 @@
 			baseConfigurationReference = 23F224DE5B0EF137414F3A08 /* Pods-BDTestsUnitTestsUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = Q953KSA8G4;
 				INFOPLIST_FILE = BDTestsUnitTestsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedissident.bdtests.BDTestsUnitTestsUITests;
@@ -720,6 +729,7 @@
 			baseConfigurationReference = B0A7C41D297A46B813BB1A89 /* Pods-BDTestsUnitTestsUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = Q953KSA8G4;
 				INFOPLIST_FILE = BDTestsUnitTestsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedissident.bdtests.BDTestsUnitTestsUITests;

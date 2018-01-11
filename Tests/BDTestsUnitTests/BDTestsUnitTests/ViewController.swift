@@ -11,25 +11,24 @@ import Alamofire
 
 extension BDTestsHelper {
 
+    /**
+     This is a test method that mimics setting up the app with data from the database prior to launching the first view controller. This is hit from the AppDelegate in didFinishLaunchItems. It requires this line in _ = BDTestsEnv().testEnv() in the AppDelegate in didFinishLaunchItems method.
+     
+        This can be in fact used to do any set up.
+    */
     public func testMethod(){
         
-        print("DATA BASE METHOD CALLED")
+        //MIMIC DATABASE(Persitence) WITH USER DEFAULTS.
         UserDefaults.standard.set("test-string", forKey: "test-string")
     }
 }
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var testText: UITextView!
+    @IBOutlet weak var testText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let testString = UserDefaults.standard.value(forKey: "test-string") as? String{
-            testText.text = testString
-        }else{
-            print("NO DATA BASE INTERACTION")
-        }
-        testText.accessibilityLabel = "HELLO"
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,14 +36,31 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /**
+     PULL DATA FROM DB AND PRINT TO label on screen
+    */
+    @IBAction func printLocalData(){
+        if let testString = UserDefaults.standard.value(forKey: "test-string") as? String{
+            testText.text = testString
+            testText.accessibilityLabel = testString
+        }else{
+            testText.text = "NO DATA BASE INTERACTION"
+            testText.accessibilityLabel = "NO DATA BASE INTERACTION"
+        }
+    }
+    
+    /**
+     Handle button press for making an api call
+    */
     @IBAction func submitData(_ sender: Any) {
         self.makeApiCall()
     }
     
+    /**
+     User Alamofire to make an api call and process response into the test label
+    */
     func makeApiCall(){
-        
-        
-        self.testText.text = "TRY"
+        self.testText.text = "... ... ..."
         Alamofire.request("http://test.com",headers:nil).responseJSON { response in
             if let data = response.value {
                 if let d = data as? [String:AnyObject]{
@@ -58,8 +74,5 @@ class ViewController: UIViewController {
                 self.testText.text = "FAIL"
             }
         }
-        
-       
     }
 }
-

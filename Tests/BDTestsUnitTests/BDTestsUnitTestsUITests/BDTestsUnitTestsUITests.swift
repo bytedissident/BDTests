@@ -4,14 +4,10 @@
 //
 //  Created by Derek Bronston on 5/22/17.
 //  Copyright © 2017 Derek Bronston. All rights reserved.
-//
-
 import XCTest
-
-
 @testable import BDTestsUnitTests
 
-class BDTestsUnitTestsUITests: XCTestCase {
+class BDTestsUnitTestsUITests: BDTestsUI {
         
     override func setUp() {
         super.setUp()
@@ -23,89 +19,79 @@ class BDTestsUnitTestsUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testMultiStub(){
+    func testGivenTheUserTriggersNothingWeOnlySeeDefaultData(){
+        
+        let app = XCUIApplication()
+        app.launch()
+        
+        label(behavior: "We should now see the label display", text: "NO DATA YET", identifier: "NO DATA YET", exists: true)
+    }
+    
+    func testGivenTheUserTriggersCachedDataFromTheDatabaseThenCallsApi(){
+        
+        let bdTests = BDTests(enviornmentName: nil)
+        _ = bdTests.seedDatabase(ref: "testMethod")
+        
+        let app = XCUIApplication()
+        app.launch()
+        
+        button(behavior: "Press the button to trigger an db action", identifier: "Two", tap: true, exists: true)
+        
+        label(behavior: "We should now see the label display", text: "test-string", identifier: "test-string", exists: true)
+        
+        //ADD A SECOND STUB RESPONSE
+        _ = bdTests.createTest(jsonString: "{\"key\":\"value 2\"}", jsonFile: nil, httpCode: 200)
+        
+        button(behavior: "Press the button to trigger an api call", identifier: "One", tap: true, exists: true)
+        
+        label(behavior: "We should now see the label display", text: "value 2", identifier: "value 2", exists: true)
+    }
+    
+    func testGivenTheUserTriggersCachedDataFromTheDatabse(){
+        
+        let bdTests = BDTests(enviornmentName: nil)
+        _ = bdTests.seedDatabase(ref: "testMethod")
+        
+        let app = XCUIApplication()
+        app.launch()
+        
+        button(behavior: "Press the button to trigger an db action", identifier: "Two", tap: true, exists: true)
+        
+        label(behavior: "We should now see the label display", text: "test-string", identifier: "test-string", exists: true)
+    }
+    
+    func testGivenTheUserMakesOneAPICall(){
+        
+        let bdTests = BDTests(enviornmentName: nil)
+        _ = bdTests.createTest(jsonString: "{\"key\":\"value\"}", jsonFile: nil, httpCode: 200)
+        
+        let app = XCUIApplication()
+        app.launch()
+        
+        button(behavior: "Press the button to trigger an api call", identifier: "One", tap: true, exists: true)
+        
+        
+        label(behavior: "We should now see the label display", text: "value", identifier: "value", exists: true)
+    }
+    
+    func testGivenTheUserMakesTwoAPICalls(){
       
         let bdTests = BDTests(enviornmentName: nil)
         _ = bdTests.createTest(jsonString: "{\"key\":\"value\"}", jsonFile: nil, httpCode: 200)
-        _ = bdTests.seedDatabase(ref: "testMethod")
-        //UIPasteboard.general.string = "Hello world"
-        
         
         let app = XCUIApplication()
         app.launch()
-        app.buttons["One"].tap()
+        
+         button(behavior: "Press the button to trigger an api call", identifier: "One", tap: true, exists: true)
         
  
-        //UIPasteboard.general.string = "Hello world 2"
+        label(behavior: "We should now see the label display", text: "value", identifier: "value", exists: true)
+        
+        //ADD A SECOND STUB RESPONSE
         _ = bdTests.createTest(jsonString: "{\"key\":\"value 2\"}", jsonFile: nil, httpCode: 200)
-        //bdTests.setClipboard(json: "{\"key\":\"value 2\"}")
         
-         app.buttons["One"].tap()
-        //app.buttons["Submit"].tap()
+        button(behavior: "Press the button to trigger an api call", identifier: "One", tap: true, exists: true)
         
-    }
-    
-    func testMultiStub_testTwice(){
-        
-        let bdTests = BDTests(enviornmentName: nil)
-        _ = bdTests.createTest(jsonString: "{\"key\":\"value\"}", jsonFile: nil, httpCode: 200)
-        _ = bdTests.seedDatabase(ref: "testMethod")
-        //UIPasteboard.general.string = "Hello world"
-        
-        
-        let app = XCUIApplication()
-        app.launch()
-        app.buttons["One"].tap()
-        
-        
-        //UIPasteboard.general.string = "Hello world 2"
-        _ = bdTests.createTest(jsonString: "{\"key\":\"value 2\"}", jsonFile: nil, httpCode: 200)
-        //bdTests.setClipboard(json: "{\"key\":\"value 2\"}")
-        
-        app.buttons["One"].tap()
-        //app.buttons["Submit"].tap()
-        
-    }
-    
-    func testMultiStub_dataFile(){
-        
-        let bdTests = BDTests(enviornmentName: nil)
-        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
-        //UIPasteboard.general.string = "Hello world"
-        _ = bdTests.seedDatabase(ref: "testMethod")
-        
-        let app = XCUIApplication()
-        app.launch()
-        app.buttons["One"].tap()
-        
-        
-        //UIPasteboard.general.string = "Hello world 2"
-        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
-        //bdTests.setClipboard(json: "{\"key\":\"value 2\"}")
-        
-        app.buttons["One"].tap()
-        //app.buttons["Submit"].tap()
-        
-    }
-    
-    func testMultiStub_testTwice_dataFile(){
-        
-        let bdTests = BDTests(enviornmentName: nil)
-        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
-        //UIPasteboard.general.string = "Hello world"
-        _ = bdTests.seedDatabase(ref: "testMethod")
-        
-        let app = XCUIApplication()
-        app.launch()
-        app.buttons["One"].tap()
-        
-        
-        //UIPasteboard.general.string = "Hello world 2"
-        _ = bdTests.createTest(jsonString: nil, jsonFile: "test_local_json", httpCode: 200)
-        //bdTests.setClipboard(json: "{\"key\":\"value 2\"}")
-        
-        app.buttons["One"].tap()
-        //app.buttons["Submit"].tap()
-        
+        label(behavior: "We should now see the label display", text: "value 2", identifier: "value 2", exists: true)
     }
 }

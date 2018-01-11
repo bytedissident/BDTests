@@ -26,8 +26,16 @@ class BDTestsTests: XCTestCase {
         super.tearDown()
     }
     
+    
        
     func testCreateTest_jsonString_multipleStubs(){
+        
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+            UIPasteboard.general.items = [[:]]
+        }
         
         //TEST 1
         let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
@@ -56,6 +64,13 @@ class BDTestsTests: XCTestCase {
 
     func testCreateTest_jsonFile(){
         
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+            UIPasteboard.general.items = [[:]]
+        }
+        
         let test = sut.createTest(jsonString:nil , jsonFile:"test_data", httpCode: 400)
         XCTAssert(test)
         
@@ -73,15 +88,25 @@ class BDTestsTests: XCTestCase {
     func testSeedDatabase(){
         
         //CLEAR
-        let paste = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName+"-model"), create: true)
-        paste?.string = ""
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+            UIPasteboard.general.items = [[:]]
+        }
         
        let seeded =  sut.seedDatabase(ref: "JSON-STRING")
         XCTAssert(seeded)
         
-        let read = UIPasteboard(name: UIPasteboardName(rawValue: sut.enviornmentName+"-model"), create: true)
-         XCTAssertEqual(read?.string, "JSON-STRING")
-        //sut.se
+        let items =  UIPasteboard.general.items
+        for item in items {
+            if let model = item["model"]  {
+                guard let modelData = model as? Data else { XCTFail(); return  }
+                guard let methodName = String(data: modelData, encoding: .utf8) else { XCTFail(); return  }
+                //removeTest()
+               XCTAssertEqual(methodName, "JSON-STRING")
+            }
+        }
     }
     
     func testReadDatabase(){
@@ -99,29 +124,42 @@ class BDTestsTests: XCTestCase {
     }
     
     func testSetClipboard(){
-        
+        UIPasteboard.general.setItems([[:]], options: [:])
         let paste = sut.setClipboard(json: "{\"key\":\"value\"}")
         XCTAssert(paste)
         
-        let  readPaste = UIPasteboard.general.string
-        if let myString = readPaste {
-           XCTAssertEqual(myString, "{\"key\":\"value\"}")
-        }else{
-            XCTFail()
+        let items =  UIPasteboard.general.items
+        for item in items {
+        
+            if let model = item["data"]  {
+                guard let modelData = model as? Data else { XCTFail(); return  }
+                guard let code = String(data: modelData, encoding: .utf8) else { XCTFail(); return  }
+                //removeTest()
+                XCTAssertEqual(code, "{\"key\":\"value\"}")
+            }
         }
     }
     
     func testReadClipboard(){
         
         //SET UP
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+            UIPasteboard.general.items = [[:]]
+        }
         let paste = sut.setClipboard(json: "{\"key\":\"value\"}")
         XCTAssert(paste)
         
-        let  readPaste = UIPasteboard.general.string
-        if let myString = readPaste {
-            XCTAssertEqual(myString, "{\"key\":\"value\"}")
-        }else{
-            XCTFail()
+        let items =  UIPasteboard.general.items
+        for item in items {
+            if let model = item["data"]  {
+                guard let modelData = model as? Data else { XCTFail(); return  }
+                guard let code = String(data: modelData, encoding: .utf8) else { XCTFail(); return  }
+                //removeTest()
+                XCTAssertEqual(code, "{\"key\":\"value\"}")
+            }
         }
         
         //TEST
@@ -131,9 +169,6 @@ class BDTestsTests: XCTestCase {
         }else{
             XCTFail()
         }
-        //CLIPBOARD SHOULD BE CLEAR AFTER READ
-        let readAgain = sut.readClipboard()
-        XCTAssertEqual(readAgain, "")
     }
     
     func testConvertToDictionary(){
@@ -202,7 +237,12 @@ class BDTestsTests: XCTestCase {
     
     func testSeedDatabase_(){
         
-        UIPasteboard.general.setItems([[:]], options: [:])
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+            UIPasteboard.general.items = [[:]]
+        }
         let json = "one"
         let modelData = sut.seedDatabase(ref: json)
         XCTAssert(modelData)
@@ -219,7 +259,12 @@ class BDTestsTests: XCTestCase {
     
     func testReadDatabaseData(){
         
-        UIPasteboard.general.setItems([[:]], options: [:])
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+            UIPasteboard.general.items = [[:]]
+        }
         let json = "{\"key\":\"value\"}"
         let modelData = sut.seedDatabase(ref: json)
         XCTAssert(modelData)
@@ -232,7 +277,12 @@ class BDTestsTests: XCTestCase {
     func testRemoveTest(){
         
         //BASELINE
-        UIPasteboard.general.items = [[:]]
+        if #available(iOS 10.0, *) {
+            UIPasteboard.general.setItems([[:]], options: [:])
+        } else {
+            // Fallback on earlier versions
+            UIPasteboard.general.items = [[:]]
+        }
         let json = "{\"key\":\"value\"}"
         let data = sut.setClipboard(json: json)
         XCTAssert(data)
@@ -273,6 +323,9 @@ class BDTestsTests: XCTestCase {
     }
     
     func testIsModelTest_true(){
+        
+        sut.removeModelTest()
+        
         //SET UP
         XCTAssertFalse(sut.isModelTest())
         
