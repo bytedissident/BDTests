@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
   # }
 
    #s.public_header_files = 'Pod/Classes/**/*'
-   #s.frameworks = 'XCTest'
+   s.frameworks = 'XCTest'
    s.dependency 'OHHTTPStubs'
    s.dependency 'OHHTTPStubs/Swift'
 end
