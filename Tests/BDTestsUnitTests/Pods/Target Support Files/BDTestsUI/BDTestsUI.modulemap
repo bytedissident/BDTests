@@ -1,0 +1,6 @@
+framework module BDTestsUI {
+  umbrella header "BDTestsUI-umbrella.h"
+
+  export *
+  module * { export * }
+}

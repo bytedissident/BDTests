@@ -5,6 +5,8 @@
 //  Created by Derek Bronston on 5/22/17.
 //  Copyright © 2017 Derek Bronston. All rights reserved.
 import XCTest
+import BDTestsUI
+
 @testable import BDTestsUnitTests
 
 class BDTestsUnitTestsUITests: BDTestsUI {

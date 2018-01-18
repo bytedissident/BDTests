@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import BDTestsUI
+
 class BDTestsUITestsUITests: BDTestsUI {
     
     override func setUp() {
