@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BDTests'
-  s.version          = '0.0.10'
+  s.version          = '0.0.11'
   s.summary          = 'A Swift UITesting framework. Intended to simplify stubbing UITests'
 
 # This description is used to generate tags and improve search results.
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
   # }
 
    #s.public_header_files = 'Pod/Classes/**/*'
-   s.frameworks = 'XCTest'
+   
    s.dependency 'OHHTTPStubs'
    s.dependency 'OHHTTPStubs/Swift'
 end
