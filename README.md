@@ -65,9 +65,10 @@ In cases where you want to do multiple requests simply create a 2nd test with a 
 let sut = BDTests(enviornment:nil)
 let test = sut.createTest(jsonString: "{\"key\":\"value\"}" , jsonFile: nil, httpCode: 400)
 
-//TEST 2
-sut.enviornmentName = "test-2
-let test2 = sut.createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)
+//DO SOME UI TESTS
+
+//TEST ANOTHER STUBBED CALL
+sut.createTest(jsonString: "{\"key2\":\"value2\"}" , jsonFile: nil, httpCode: 200)
 ```
 
 ## Setting up your app's state for a test
