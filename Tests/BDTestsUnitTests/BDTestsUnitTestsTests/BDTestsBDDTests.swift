@@ -11,29 +11,59 @@ import XCTest
 class BDTestsBDDTests: XCTestCase {
     
     var sut:MainController!
+    var sutTable:TableController!
+    var sutCollection:CollectionController!
     
     override func setUp() {
         super.setUp()
-        
-        let story = UIStoryboard(name: "Main", bundle: nil)
-        sut = story.instantiateViewController(withIdentifier: "MainView") as! MainController
-        sut.loadView()
-        sut.viewDidLoad()
     }
     
     override func tearDown() {
         super.tearDown()
     }
     
-    func testGivenTheUser_failsToExecute(){
-    
-        //TEST
-        let bdUIElement = BDUIElement(type: .button, element: ["":0])
-        let executed = sut.givenTheUser(doesThis: "Tries to do something", withThis: bdUIElement, weExpect: "this to fail", letsVerify: {}, orDoSomethingElse: {})
-        XCTAssertFalse(executed)
+    func setUp(type:BDElementType){
+        switch type {
+            case .button:
+                setUpControllerForButton()
+                return
+            case .table:
+                setUpControllerForTable()
+                return
+            case .tabbar:
+                setUpControllerForButton()
+                return
+            case .collection:
+                setUpControllerForCollection()
+                return
+        }
     }
     
+    func setUpControllerForButton(){
+        let story = UIStoryboard(name: "Main", bundle: nil)
+        sut = story.instantiateViewController(withIdentifier: "MainView") as! MainController
+        sut.loadView()
+        sut.viewDidLoad()
+    }
+    
+    func setUpControllerForTable(){
+        let story = UIStoryboard(name: "Main", bundle: nil)
+        sutTable = story.instantiateViewController(withIdentifier: "Table") as! TableController
+        sutTable.loadView()
+        sutTable.viewDidLoad()
+    }
+    
+    func setUpControllerForCollection(){
+        let story = UIStoryboard(name: "Main", bundle: nil)
+        sutCollection = story.instantiateViewController(withIdentifier: "Collection") as! CollectionController
+        sutCollection.loadView()
+        sutCollection.viewDidLoad()
+    }
+    
+    //MARK: BUTTON
     func testGivenTheUser_successfullyExecutesTestOnAButtonOutlet(){
+        
+        setUp(type: .button)
         
         //TEST
         let button = BDButton(outlet: sut.testButton, identifier: nil, action: .touchUpInside, parent: nil)
@@ -44,8 +74,41 @@ class BDTestsBDDTests: XCTestCase {
         XCTAssert(executed)
     }
     
+    func testGivenTheUser_failsToExecutesTestOnAButtonOutlet_badKey(){
+        setUp(type: .button)
+        //TEST
+        let button = BDButton(outlet: sut.testButton, identifier: nil, action: .touchUpInside, parent: nil)
+        let bdUIElement = BDUIElement(type: .button, element: ["btn":button])
+        let executed = sut.givenTheUser(doesThis: "Presses the Test Button", withThis: bdUIElement, weExpect: "To see test-value in the label", letsVerify: {
+            XCTFail()
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
+    }
+    
+    func testGivenTheUser_failsToExecutesTest_noOutlet_noIdentifier(){
+        setUp(type: .button)
+        //TEST
+        let button = BDButton(outlet: nil, identifier: nil, action: .touchUpInside, parent: nil)
+        let bdUIElement = BDUIElement(type: .button, element: ["button":button])
+        let executed = sut.givenTheUser(doesThis: "Presses the Test Button", withThis: bdUIElement, weExpect: "To see test-value in the label", letsVerify: {
+            XCTFail()
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
+    }
+    
+    func testGivenTheUser_failsToExecutesTestButtonWithIdentifier_noParent(){
+        setUp(type: .button)
+        //TEST
+        let button = BDButton(outlet: nil, identifier: nil, action: .touchUpInside, parent: nil)
+        let bdUIElement = BDUIElement(type: .button, element: ["button":button])
+        let executed = sut.givenTheUser(doesThis: "Presses the Test Button", withThis: bdUIElement, weExpect: "To see test-value in the label", letsVerify: {
+            XCTFail()
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
+    }
+    
     func testGivenTheUser_successfullyExecutesTestOnAButtonWithAnIdentifier(){
-        
+        setUp(type: .button)
         //SET UP
         let buttonWithID = UIButton()
         buttonWithID.accessibilityIdentifier = "test-button-id"
@@ -59,5 +122,115 @@ class BDTestsBDDTests: XCTestCase {
             XCTAssertEqual(self.sut.testLabel.text, "test-value")
         }, orDoSomethingElse: {})
         XCTAssert(executed)
+    }
+    
+    func testGivenTheUser_successfullyExecutesTestOnANestedButtonWithAnIdentifier(){
+        setUp(type: .button)
+        //SET UP
+        let subview = UIView()
+        let subview2 = UIView()
+        let buttonWithID = UIButton()
+        buttonWithID.accessibilityIdentifier = "test-button-id"
+        buttonWithID.addTarget(sut, action: #selector(sut.testButtonAction), for: .touchUpInside)
+        subview2.addSubview(buttonWithID)
+        subview.addSubview(subview2)
+        sut.view.addSubview(subview)
+        
+        //TEST
+        let button = BDButton(outlet: nil, identifier: "test-button-id", action: .touchUpInside, parent: sut.view)
+        let bdUIElement = BDUIElement(type: .button, element: ["button":button])
+        let executed = sut.givenTheUser(doesThis: "Presses the Button", withThis: bdUIElement, weExpect: "To see test-value in the label", letsVerify: {
+            XCTAssertEqual(self.sut.testLabel.text, "test-value")
+        }, orDoSomethingElse: {})
+        XCTAssert(executed)
+    }
+    
+    //MARK: TABLE
+    func testGivenTheUser_successfullyExecutesTestOnATableOutlet(){
+        setUp(type: .table)
+        
+        //TEST
+        let indexPath = IndexPath(row: 0, section: 0)
+
+        let table = BDTable(outlet: sutTable.tView, indexPath: indexPath, select: true)
+        let bdUIElement = BDUIElement(type: .table, element: ["table":table])
+        let executed = sutTable.givenTheUser(doesThis: "Presses the cell at row 0, section 0", withThis: bdUIElement, weExpect: "To see Test Value printed to the label", letsVerify: {
+            XCTAssertEqual(self.sutTable.testLabel.text,"Test Value")
+            
+        }, orDoSomethingElse: {})
+        XCTAssert(executed)
+    }
+    
+    func testGivenTheUser_failesToExecuteTestOnATableOutlet_badKey(){
+        setUp(type: .table)
+        
+        //TEST
+        let indexPath = IndexPath(row: 0, section: 0)
+        
+        let table = BDTable(outlet: sutTable.tView, indexPath: indexPath, select: true)
+        let bdUIElement = BDUIElement(type: .table, element: ["t-ble":table])
+        let executed = sutTable.givenTheUser(doesThis: "Presses the cell at row 0, section 0", withThis: bdUIElement, weExpect: "To see a system alert", letsVerify: {
+            XCTFail()
+            
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
+    }
+    
+    func testGivenTheUser_failesToExecuteTestOnATableOutlet_noSelect(){
+        setUp(type: .table)
+        
+        //TEST
+        let indexPath = IndexPath(row: 0, section: 0)
+        
+        let table = BDTable(outlet: sutTable.tView, indexPath: indexPath, select: false)
+        let bdUIElement = BDUIElement(type: .table, element: ["table":table])
+        let executed = sutTable.givenTheUser(doesThis: "Presses the cell at row 0, section 0", withThis: bdUIElement, weExpect: "To see a system alert", letsVerify: {
+            XCTFail()
+            
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
+    }
+    
+    //MARK: Collection
+    func testGivenTheUser_successfullyExecutesTestOnACollectionOutlet(){
+        setUp(type: .collection)
+        
+        //TEST
+        let indexPath = IndexPath(row: 0, section: 0)
+        let collection = BDCollection(outlet: sutCollection.collection, indexPath: indexPath, select: true)
+        let bdUIElement = BDUIElement(type: .collection, element: ["collection":collection])
+        let executed = sutCollection.givenTheUser(doesThis: "Presses the cell at row 0, section 0", withThis: bdUIElement, weExpect: "To see Test Value printed to the label", letsVerify: {
+            XCTAssertEqual(self.sutCollection.testLabel.text,"Test Value")
+            
+        }, orDoSomethingElse: {})
+        XCTAssert(executed)
+    }
+
+    func testGivenTheUser_failedToExecuteTestOnACollectionOutlet_badKey(){
+        setUp(type: .collection)
+        
+        //TEST
+        let indexPath = IndexPath(row: 0, section: 0)
+        let collection = BDCollection(outlet: sutCollection.collection, indexPath: indexPath, select: true)
+        let bdUIElement = BDUIElement(type: .collection, element: ["c-llection":collection])
+        let executed = sutCollection.givenTheUser(doesThis: "Presses the cell at row 0, section 0", withThis: bdUIElement, weExpect: "To see a system alert", letsVerify: {
+           XCTFail()
+            
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
+    }
+    
+    func testGivenTheUser_failedToExecuteTestOnACollectionOutlet_noSelect(){
+        setUp(type: .collection)
+        
+        //TEST
+        let indexPath = IndexPath(row: 0, section: 0)
+        let collection = BDCollection(outlet: sutCollection.collection, indexPath: indexPath, select: false)
+        let bdUIElement = BDUIElement(type: .collection, element: ["collection":collection])
+        let executed = sutCollection.givenTheUser(doesThis: "Presses the cell at row 0, section 0", withThis: bdUIElement, weExpect: "To see a system alert", letsVerify: {
+            XCTFail()
+            
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
     }
 }

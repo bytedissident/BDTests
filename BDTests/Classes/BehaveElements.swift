@@ -14,16 +14,21 @@ struct BDUIElement{
 
 enum  BDElementType {
     case button
-    case tabBar
+    case tabbar
     case table
     case collection
 }
 
 struct BDTable {
-    let outlet:UITableView?
-    let identifier:String?
+    let outlet:UITableView
     let indexPath:IndexPath
-    let select:Bool?
+    let select:Bool
+}
+
+struct BDCollection {
+    let outlet:UICollectionView
+    let indexPath:IndexPath
+    let select:Bool
 }
 
 struct BDButton {
