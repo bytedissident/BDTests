@@ -265,4 +265,18 @@ class BDTestsBDDTests: XCTestCase {
         }, orDoSomethingElse: {})
         XCTAssert(executed)
     }
+    
+    func testGivenTheUser_failsExecutesTestOnATabBar_badKey(){
+        setUp(type: .tabbar)
+        
+        //TEST
+        let index = sutTab.selectedIndex
+        XCTAssertEqual(index, 0)
+        let tab = BDTabBar(index: 1, outlet: sutTab)
+        let bdUIElement = BDUIElement(type: .tabbar, element: ["t-bbar":tab])
+        let executed = sutTab.givenTheUser(doesThis: "Presses the cell at row 0, section 0", withThis: bdUIElement, weExpect: "To see Test Value printed to the label", letsVerify: {
+            XCTFail()
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
+    }
 }
