@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6249DECF5BF2FDCB21BBC0E9 /* Pods_BDTestsUnitTestsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40A385F74F451C2185873C9 /* Pods_BDTestsUnitTestsUITests.framework */; };
+		871473C7211091C5009A35A4 /* BDTestsBDD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871473C6211091C5009A35A4 /* BDTestsBDD.swift */; };
 		872789BB1F1539550063BD51 /* BDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052E21ED360ED00A04704 /* BDTests.swift */; };
 		875052941ED3482100A04704 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052931ED3482100A04704 /* AppDelegate.swift */; };
 		875052961ED3482100A04704 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875052951ED3482100A04704 /* ViewController.swift */; };
@@ -29,6 +30,8 @@
 		877256D9200FE2FC001E2A1D /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877256D5200FE2FC001E2A1D /* CollectionViewController.swift */; };
 		877256DA200FE2FC001E2A1D /* TableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877256D6200FE2FC001E2A1D /* TableTableViewController.swift */; };
 		877256DD200FE9F5001E2A1D /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877256DC200FE9F5001E2A1D /* CollectionCell.xib */; };
+		87FD2E3521135BE000DDDFEC /* BDElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FD2E3421135BE000DDDFEC /* BDElements.swift */; };
+		87FD2E3921135C6900DDDFEC /* BDTestsBDDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FD2E3821135C6900DDDFEC /* BDTestsBDDTests.swift */; };
 		C9A7AA36C90CABD3483B61F6 /* Pods_BDTestsUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D9DE037DD7F0D0CFD98C3BE /* Pods_BDTestsUnitTests.framework */; };
 		E1EFAE57E7F756FFB5113871 /* Pods_BDTestsUnitTestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 757095E08E96D66940B99A43 /* Pods_BDTestsUnitTestsTests.framework */; };
 /* End PBXBuildFile section */
@@ -55,7 +58,7 @@
 		23F224DE5B0EF137414F3A08 /* Pods-BDTestsUnitTestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTestsUITests/Pods-BDTestsUnitTestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		728D0265EB100D0AF47FA432 /* Pods-BDTestsUnitTestsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTestsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTestsTests/Pods-BDTestsUnitTestsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		757095E08E96D66940B99A43 /* Pods_BDTestsUnitTestsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDTestsUnitTestsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		872F0346200FD8C8009F7BBF /* BDTestsUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsUI.swift; sourceTree = "<group>"; };
+		871473C6211091C5009A35A4 /* BDTestsBDD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDTestsBDD.swift; sourceTree = "<group>"; };
 		875052901ED3482100A04704 /* BDTestsUnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDTestsUnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		875052931ED3482100A04704 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		875052951ED3482100A04704 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,12 +81,13 @@
 		875052E31ED360ED00A04704 /* BDTestsEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsEnv.swift; sourceTree = "<group>"; };
 		875052E41ED360ED00A04704 /* BDTestsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsHelper.swift; sourceTree = "<group>"; };
 		877256CE200FDE14001E2A1D /* BDTestsUITestsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsUITestsUITests.swift; sourceTree = "<group>"; };
-		877256D0200FDE3D001E2A1D /* BDTestsUIBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTestsUIBase.swift; sourceTree = "<group>"; };
 		877256D3200FE2FC001E2A1D /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		877256D4200FE2FC001E2A1D /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		877256D5200FE2FC001E2A1D /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		877256D6200FE2FC001E2A1D /* TableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTableViewController.swift; sourceTree = "<group>"; };
 		877256DC200FE9F5001E2A1D /* CollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
+		87FD2E3421135BE000DDDFEC /* BDElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDElements.swift; sourceTree = "<group>"; };
+		87FD2E3821135C6900DDDFEC /* BDTestsBDDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BDTestsBDDTests.swift; sourceTree = "<group>"; };
 		9CFFBF0C40B823CF473B1EDA /* Pods-BDTestsUnitTestsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTestsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTestsTests/Pods-BDTestsUnitTestsTests.release.xcconfig"; sourceTree = "<group>"; };
 		B0A7C41D297A46B813BB1A89 /* Pods-BDTestsUnitTestsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTestsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTestsUITests/Pods-BDTestsUnitTestsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BEFB14F0E765A3E3205B17A4 /* Pods-BDTestsUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDTestsUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BDTestsUnitTests/Pods-BDTestsUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				875052C91ED348D800A04704 /* BDTestsTests.swift */,
 				875052AA1ED3482100A04704 /* Info.plist */,
 				875052DB1ED3576700A04704 /* BDTestsEnvTests.swift */,
+				87FD2E3821135C6900DDDFEC /* BDTestsBDDTests.swift */,
 			);
 			path = BDTestsUnitTestsTests;
 			sourceTree = "<group>";
@@ -196,8 +201,8 @@
 				875052E21ED360ED00A04704 /* BDTests.swift */,
 				875052E31ED360ED00A04704 /* BDTestsEnv.swift */,
 				875052E41ED360ED00A04704 /* BDTestsHelper.swift */,
-				872F0346200FD8C8009F7BBF /* BDTestsUI.swift */,
-				877256D0200FDE3D001E2A1D /* BDTestsUIBase.swift */,
+				871473C6211091C5009A35A4 /* BDTestsBDD.swift */,
+				87FD2E3421135BE000DDDFEC /* BDElements.swift */,
 			);
 			name = Classes;
 			path = ../../BDTests/Classes;
@@ -517,6 +522,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87FD2E3521135BE000DDDFEC /* BDElements.swift in Sources */,
+				871473C7211091C5009A35A4 /* BDTestsBDD.swift in Sources */,
 				875052961ED3482100A04704 /* ViewController.swift in Sources */,
 				875052E71ED360ED00A04704 /* BDTestsEnv.swift in Sources */,
 				875052E61ED360ED00A04704 /* BDTests.swift in Sources */,
@@ -534,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				875052CA1ED348D800A04704 /* BDTestsTests.swift in Sources */,
+				87FD2E3921135C6900DDDFEC /* BDTestsBDDTests.swift in Sources */,
 				875052DC1ED3576700A04704 /* BDTestsEnvTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

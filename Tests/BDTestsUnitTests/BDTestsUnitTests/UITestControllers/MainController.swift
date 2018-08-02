@@ -52,8 +52,11 @@ class MainController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view.button(behavior:"Press Test Button",identifier: "button-three",tap: UIControlEvents.touchUpInside)
+        /*view.givenTheUser(doesThis: "Presses the", uiElement: ["button":testButton,"action":UIControlEvents.touchUpInside])
         
-        // Do any additional setup after loading the view, typically from a nib.
+       let outcome = view.weExpect(this: "The lable to say", behavior: ["label":testLabel,"output":"test-value"])
+        assert(outcome)*/
     }
 
     override func didReceiveMemoryWarning() {
