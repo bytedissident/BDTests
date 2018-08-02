@@ -31,6 +31,12 @@ extension UIViewController {
             return false
             
         case .tabbar:
+            let executed = tabBar(uiElement: withThis.element)
+            if executed{
+                letsVerify()
+                orDoSomethingElse()
+                return true
+            }
             return false
             
         case .collection:
@@ -45,6 +51,12 @@ extension UIViewController {
     }
     
     //MARK: UI ELEMENTS
+    private func tabBar(uiElement:[String:Any]) -> Bool {
+        guard let tb = uiElement["tabbar"] as? BDTabBar else { return false }
+        return tabBarWithOutlet(tbar:tb)
+        
+    }
+    
     private func table(uiElement:[String:Any]) -> Bool {
         guard let tbl = uiElement["table"] as? BDTable else { return false }
         return tableWithOutlet(table: tbl)
@@ -63,6 +75,11 @@ extension UIViewController {
             return buttonWithIdentifier(button: theButton)
         }
         return false
+    }
+    
+    private func tabBarWithOutlet(tbar:BDTabBar) -> Bool {
+        tbar.outlet.selectedIndex = tbar.index
+        return true
     }
     
     private func tableWithOutlet(table:BDTable) -> Bool{

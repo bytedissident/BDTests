@@ -13,7 +13,7 @@ class BDTestsBDDTests: XCTestCase {
     var sut:MainController!
     var sutTable:TableController!
     var sutCollection:CollectionController!
-    
+    var sutTab:UITabBarController!
     override func setUp() {
         super.setUp()
     }
@@ -31,7 +31,7 @@ class BDTestsBDDTests: XCTestCase {
                 setUpControllerForTable()
                 return
             case .tabbar:
-                setUpControllerForButton()
+                setUpControllerForTabBar()
                 return
             case .collection:
                 setUpControllerForCollection()
@@ -58,6 +58,11 @@ class BDTestsBDDTests: XCTestCase {
         sutCollection = story.instantiateViewController(withIdentifier: "Collection") as! CollectionController
         sutCollection.loadView()
         sutCollection.viewDidLoad()
+    }
+    
+    func setUpControllerForTabBar(){
+        sutTab = UITabBarController()
+        sutTab.viewControllers = [UIViewController(),UIViewController()]
     }
     
     //MARK: BUTTON
@@ -143,6 +148,18 @@ class BDTestsBDDTests: XCTestCase {
             XCTAssertEqual(self.sut.testLabel.text, "test-value")
         }, orDoSomethingElse: {})
         XCTAssert(executed)
+    }
+    
+    func testGivenTheUser_failsToExecutesTestNestedButtonWithIdentifier_noSubviews(){
+        setUp(type: .button)
+        //TEST
+        let v = UIView()
+        let button = BDButton(outlet: nil, identifier: "test", action: .touchUpInside, parent: v)
+        let bdUIElement = BDUIElement(type: .button, element: ["button":button])
+        let executed = sut.givenTheUser(doesThis: "Presses the Test Button", withThis: bdUIElement, weExpect: "To see test-value in the label", letsVerify: {
+            XCTFail()
+        }, orDoSomethingElse: {})
+        XCTAssertFalse(executed)
     }
     
     //MARK: TABLE
@@ -232,5 +249,20 @@ class BDTestsBDDTests: XCTestCase {
             
         }, orDoSomethingElse: {})
         XCTAssertFalse(executed)
+    }
+    
+    //MARK: TabBar
+    func testGivenTheUser_successfullyExecutesTestOnATabBar(){
+        setUp(type: .tabbar)
+        
+        //TEST
+        let index = sutTab.selectedIndex
+        XCTAssertEqual(index, 0)
+        let tab = BDTabBar(index: 1, outlet: sutTab)
+        let bdUIElement = BDUIElement(type: .tabbar, element: ["tabbar":tab])
+        let executed = sutTab.givenTheUser(doesThis: "Presses the cell at row 0, section 0", withThis: bdUIElement, weExpect: "To see Test Value printed to the label", letsVerify: {
+            XCTAssertEqual(self.sutTab.selectedIndex,1)
+        }, orDoSomethingElse: {})
+        XCTAssert(executed)
     }
 }

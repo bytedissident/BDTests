@@ -37,3 +37,8 @@ struct BDButton {
     let action:UIControlEvents
     let parent:UIView?
 }
+
+struct BDTabBar {
+    let index:Int
+    let outlet:UITabBarController
+}
