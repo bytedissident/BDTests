@@ -1,6 +1,6 @@
 {
   "name": "BDTests",
-  "version": "0.0.1",
+  "version": "0.0.13",
   "summary": "A Swift UITesting framework. Intended to simplify stubbing UITests",
   "description": "A Swift UITesting framework. Intended to simplify stubbing UITests.",
   "homepage": "https://github.com/bytedissident/BDTests",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/bytedissident/BDTests.git",
-    "tag": "0.0.1"
+    "tag": "0.0.13"
   },
   "platforms": {
     "ios": "9.0"
