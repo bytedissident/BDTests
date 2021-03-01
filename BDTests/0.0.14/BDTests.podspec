@@ -37,6 +37,6 @@ Pod::Spec.new do |s|
 
    #s.public_header_files = 'Pod/Classes/**/*'
    
-   s.dependency 'OHHTTPStubs', '~> 8.0.0'
+   s.dependency 'OHHTTPStubs'
    s.dependency 'OHHTTPStubs/Swift'
 end
