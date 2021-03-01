@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'bytedissident' => 'dbronston@me.com' }
   s.source           = { :git => 'https://github.com/bytedissident/BDTests.git', :tag => s.version.to_s }
+  s.swift_version    = '5.0'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '12.0'
@@ -36,6 +37,6 @@ Pod::Spec.new do |s|
 
    #s.public_header_files = 'Pod/Classes/**/*'
    
-   s.dependency 'OHHTTPStubs'
+   s.dependency 'OHHTTPStubs', '~> 8.0.0'
    s.dependency 'OHHTTPStubs/Swift'
 end
