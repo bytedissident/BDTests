@@ -13,8 +13,7 @@ public class BDTestsEnv {
     
     public init(){
     
-          NotificationCenter.default.addObserver(self, selector: #selector(BDTestsEnv.runSeederAgain), name: Notification.Name.UIPasteboardChanged, object: nil)
-    
+        NotificationCenter.default.addObserver(self, selector: #selector(BDTestsEnv.runSeederAgain), name: UIPasteboard.changedNotification, object: nil)
     }
     
     public func testEnv()->(networkTest:Bool,modelTest:Bool){

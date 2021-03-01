@@ -34,6 +34,6 @@ public class BDTestsHelper:NSObject {
         }*/
         let window = UIApplication.shared.windows.first!
         window.addSubview(resetButton)
-        window.bringSubview(toFront: resetButton)
+        window.bringSubviewToFront(resetButton)
     }
 }

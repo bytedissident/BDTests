@@ -10,6 +10,27 @@ import UIKit
 import OHHTTPStubs
 
 
+/*
+ Custom pustboard is used, because tests with UIPasteboard has ~x4 execution time
+ e.g.
+ Custom Pasteboard: Executed 2351 tests, with 0 failures (0 unexpected) in 225.449 (227.031) seconds
+ UIPasteboard:      Executed 2350 tests, with 0 failures (0 unexpected) in 808.095 (809.200) seconds
+ */
+private class Pasteboard {
+    static var general = Pasteboard()
+
+    func setItems(_ items: [[String : Any]]) {
+        self.items = items
+    }
+
+    var items: [[String : Any]] = []
+
+    func addItems(_ items: [[String : Any]]) {
+        self.items = self.items + items
+    }
+}
+
+
 public class BDTests  {
     
     //DEFAULT ENVIORNMENT NAME, USED TO DETERMINE IF WE ARE IN TEST MODE. CHANGE FTO YOUR ENVIORMENT
@@ -34,10 +55,10 @@ public class BDTests  {
      
      - return: Bool
      */
-    public func createTest(jsonString:String?,jsonFile:String?,httpCode:Int32)->Bool{
+    public func createTest(jsonString: String?, jsonFile: String?, httpCode: Int32) -> Bool {
         
         //CLEAR
-        //UIPasteboard.general.setValue(nil, forKey: "data")
+        //Pasteboard.general.setValue(nil, forKey: "data")
         
         var created = false
         
@@ -72,21 +93,19 @@ public class BDTests  {
      
      - return: Bool
      */
-    public func seedDatabase(ref:String)->Bool{
+    public func seedDatabase(ref: String) -> Bool {
         
         //CLEAR
         removeModelTest()
-        let currentItems = UIPasteboard.general.items
-        var newItems = [[String:Any]]()
-        for item in currentItems{
-            if let _ = item["model"] {
-                
-            }else{
+        let currentItems = Pasteboard.general.items
+        var newItems = [[String: Any]]()
+        for item in currentItems {
+            if item["model"] == nil {
                 newItems.append(item)
             }
         }
-        newItems.append(["model":ref])
-        UIPasteboard.general.addItems(newItems)
+        newItems.append(["model": ref])
+        Pasteboard.general.addItems(newItems)
         
         return true
     }
@@ -96,9 +115,9 @@ public class BDTests  {
      
      - retrun: String?
      */
-    public func readDatabaseData()->String?{
+    public func readDatabaseData() -> String? {
         
-        let items =  UIPasteboard.general.items
+        let items =  Pasteboard.general.items
         for item in items {
             if let model = item["model"]  {
                 guard let modelData = model as? Data else { return nil }
@@ -115,23 +134,16 @@ public class BDTests  {
      
      - return: none
      */
-    public func removeTest(){
+    public func removeTest() {
         
-        let currentItems = UIPasteboard.general.items
-        var newItems = [[String:Any]]()
+        let currentItems = Pasteboard.general.items
+        var newItems = [[String: Any]]()
         for item in currentItems{
-            if let _ = item["data"] {
-                
-            }else{
+            if item["data"] == nil {
                 newItems.append(item)
             }
         }
-        if #available(iOS 10.0, *) {
-            UIPasteboard.general.setItems([[:]], options: [:])
-        } else {
-            UIPasteboard.general.items = [[:]]
-        }
-        UIPasteboard.general.addItems(newItems)
+        Pasteboard.general.items = newItems
     }
     
     
@@ -139,24 +151,16 @@ public class BDTests  {
      removes a model test and stubs
      
      */
-    public func removeModelTest(){
+    public func removeModelTest() {
         
-        let currentItems = UIPasteboard.general.items
+        let currentItems = Pasteboard.general.items
         var newItems = [[String:Any]]()
         for item in currentItems{
-            if let _ = item["model"] {
-                
-            }else{
+            if item["model"] == nil {
                 newItems.append(item)
             }
         }
-        if #available(iOS 10.0, *) {
-            UIPasteboard.general.setItems([[:]], options: [:])
-        } else {
-            // Fallback on earlier versions
-            UIPasteboard.general.items = [[:]]
-        }
-        UIPasteboard.general.addItems(newItems)
+        Pasteboard.general.items = newItems
     }
     
     /**
@@ -165,16 +169,13 @@ public class BDTests  {
      - parameter: urlString:String
      - return: String?
      */
-    public func openFileAndReadIntoString(urlString:String)->String?{
-        if let dir = Bundle.main.path(forResource: urlString, ofType:"json"){
-            do {
-                let text2 = try String(contentsOfFile: dir)
-                return text2
-            }catch _ as NSError{
-                return nil
-            }
+    public func openFileAndReadIntoString(urlString: String) -> String? {
+        guard let dir = Bundle.main.path(forResource: urlString, ofType: "json") else { return nil }
+        do {
+            return try String(contentsOfFile: dir)
+        } catch _ as NSError {
+            return nil
         }
-        return nil
     }
     
     /**
@@ -186,9 +187,9 @@ public class BDTests  {
      
      - return: String?
      */
-    public func readClipboard()->String?{
+    public func readClipboard() -> String? {
         
-        let items =  UIPasteboard.general.items
+        let items = Pasteboard.general.items
         for item in items {
             if let model = item["data"]  {
                 guard let modelData = model as? Data else { return nil }
@@ -212,22 +213,20 @@ public class BDTests  {
      - return: Bool
      
      */
-    public func setClipboard(json:String)->Bool{
+    public func setClipboard(json: String) -> Bool {
         
         //CLEAR
         removeTest()
-        let currentItems = UIPasteboard.general.items
-        var newItems = [[String:Any]]()
+        let currentItems = Pasteboard.general.items
+        var newItems = [[String: Any]]()
         for item in currentItems{
-            if let _ = item["data"] {
-                //newItems.append(item)
-            }else{
+            if item["data"] == nil {
                 newItems.append(item)
             }
         }
         
         newItems.append(["data":json])
-        UIPasteboard.general.addItems(newItems)
+        Pasteboard.general.addItems(newItems)
         return true
     }
     
@@ -238,14 +237,13 @@ public class BDTests  {
      - return: [String:Any]?
      */
     public func convertToDictionary(text: String) -> [String: Any]? {
-        if let data = text.data(using: .utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            } catch {
-                print(error.localizedDescription)
-            }
+        guard let data = text.data(using: .utf8) else { return nil }
+        do {
+            return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        } catch {
+            print(error.localizedDescription)
+            return nil
         }
-        return nil
     }
     
     
@@ -255,14 +253,16 @@ public class BDTests  {
      - parameter dict[String:Any]
      - return: String?
      */
-    public func determineResponseText(dict:[String:Any])->String?{
+    public func determineResponseText(dict: [String: Any]) -> String? {
         
         if dict["data"] != nil {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: dict["data"]!, options: .prettyPrinted)
                 // here "jsonData" is the dictionary encoded in JSON data
-                let response = String.init(data: jsonData, encoding: .utf8)
-                guard let responseText = response else { assert(false); return nil}
+                guard let responseText = String(data: jsonData, encoding: .utf8) else {
+                    assert(false)
+                    return nil
+                }
                 return responseText
             }catch _ as NSError{
                 //assert(false);
@@ -270,9 +270,11 @@ public class BDTests  {
             }
         }
         
-        if dict["data-file"] as? String != nil {
-            
-            guard let responseText = self.openFileAndReadIntoString(urlString: dict["data-file"]! as! String) else { assert(false); return nil }
+        if let dataFileUrl = dict["data-file"] as? String {
+            guard let responseText = self.openFileAndReadIntoString(urlString: dataFileUrl) else {
+                assert(false)
+                return nil
+            }
             
             return responseText
         }
@@ -283,70 +285,69 @@ public class BDTests  {
     /**
      STUB NETWORK
      */
-    public func runTests()->Bool{
+    public func runTests() -> Bool {
         
-        stub(condition: isMethodGET()) { request -> OHHTTPStubsResponse in
+        stub(condition: isMethodGET()) { request -> HTTPStubsResponse in
+            let data = self.readData()
+            guard data.code > 0 else {
+                return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+            }
+            let code = data.code
+            let responseText = data.response
+            //print(responseText)
+            let stubData = responseText.data(using: String.Encoding.utf8)
+            return HTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+        }
+        
+        stub(condition: isMethodPOST()) { request -> HTTPStubsResponse in
             let data = self.readData()
             if data.code > 0 {
                 let code = data.code
                 let responseText = data.response
                 //print(responseText)
                 let stubData = responseText.data(using: String.Encoding.utf8)
-                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+                return HTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
             }else {
-                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+                return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
             }
         }
         
-        stub(condition: isMethodPOST()) { request -> OHHTTPStubsResponse in
+        stub(condition: isMethodPUT()) { request -> HTTPStubsResponse in
             let data = self.readData()
             if data.code > 0 {
                 let code = data.code
                 let responseText = data.response
                 //print(responseText)
                 let stubData = responseText.data(using: String.Encoding.utf8)
-                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+                return HTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
             }else {
-                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+                return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
             }
         }
         
-        stub(condition: isMethodPUT()) { request -> OHHTTPStubsResponse in
-            let data = self.readData()
-            if data.code > 0 {
-                let code = data.code
-                let responseText = data.response
-                //print(responseText)
-                let stubData = responseText.data(using: String.Encoding.utf8)
-                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
-            }else {
-                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
-            }
-        }
-        
-        stub(condition: isMethodPATCH()) { request -> OHHTTPStubsResponse in
+        stub(condition: isMethodPATCH()) { request -> HTTPStubsResponse in
             let data = self.readData()
             if data.code > 0 {
                 let code = data.code
                 let responseText = data.response
                 // print(responseText)
                 let stubData = responseText.data(using: String.Encoding.utf8)
-                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+                return HTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
             }else {
-                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+                return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
             }
         }
         
-        stub(condition: isMethodDELETE()) { request -> OHHTTPStubsResponse in
+        stub(condition: isMethodDELETE()) { request -> HTTPStubsResponse in
             let data = self.readData()
             if data.code > 0 {
                 let code = data.code
                 let responseText = data.response
                 //print(responseText)
                 let stubData = responseText.data(using: String.Encoding.utf8)
-                return OHHTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
+                return HTTPStubsResponse(data:stubData!, statusCode:code, headers:nil)
             }else {
-                return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+                return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
             }
         }
         return true
@@ -354,24 +355,24 @@ public class BDTests  {
     
     public func runTestsAs200()->Bool{
         
-        stub(condition: isMethodGET()) { request -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        stub(condition: isMethodGET()) { request -> HTTPStubsResponse in
+            return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
         }
         
-        stub(condition: isMethodPOST()) { request -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        stub(condition: isMethodPOST()) { request -> HTTPStubsResponse in
+            return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
         }
         
-        stub(condition: isMethodPUT()) { request -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        stub(condition: isMethodPUT()) { request -> HTTPStubsResponse in
+            return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
         }
         
-        stub(condition: isMethodPATCH()) { request -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        stub(condition: isMethodPATCH()) { request -> HTTPStubsResponse in
+            return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
         }
         
-        stub(condition: isMethodDELETE()) { request -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
+        stub(condition: isMethodDELETE()) { request -> HTTPStubsResponse in
+            return HTTPStubsResponse(data:Data(), statusCode:400, headers:nil)
         }
         return true
     }
@@ -394,7 +395,7 @@ public class BDTests  {
      - return: none
      */
     public func removeStubs(){
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
     }
     
     /**
