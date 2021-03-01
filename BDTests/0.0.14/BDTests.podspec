@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'bytedissident' => 'dbronston@me.com' }
-  s.source           = { :git => 'https://github.com/aahibalau/BDTests', :branch => 'feature/version_0.0.14' } #:git => 'https://github.com/bytedissident/BDTests.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/aahibalau/BDTests', :branch => 'feature/version_0.0.14', :tag => s.version.to_s } #:git => 'https://github.com/bytedissident/BDTests.git', :tag => s.version.to_s }
   s.swift_version    = '5.0'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BDTests'
-  s.version          = '0.0.13'
+  s.version          = '0.0.14'
   s.summary          = 'A Swift UITesting framework. Intended to simplify stubbing UITests'
 
 # This description is used to generate tags and improve search results.
@@ -23,10 +23,11 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'bytedissident' => 'dbronston@me.com' }
-  s.source           = { :git => 'https://github.com/bytedissident/BDTests.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/aahibalau/BDTests', :branch => 'feature/version_0.0.14', :tag => s.version.to_s } #:git => 'https://github.com/bytedissident/BDTests.git', :tag => s.version.to_s }
+  s.swift_version    = '5.0'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.0'
 
   s.source_files = 'BDTests/Classes/**/*'
   
@@ -36,6 +37,6 @@ Pod::Spec.new do |s|
 
    #s.public_header_files = 'Pod/Classes/**/*'
    
-   s.dependency 'OHHTTPStubs'
+   s.dependency 'OHHTTPStubs', '~> 8.0.0'
    s.dependency 'OHHTTPStubs/Swift'
 end
