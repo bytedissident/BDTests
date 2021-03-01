@@ -7,16 +7,19 @@
 //
 
 import Foundation
-
+import UIKit
 
 public class BDTestsEnv {
     
-    public init(){
-    
-        NotificationCenter.default.addObserver(self, selector: #selector(BDTestsEnv.runSeederAgain), name: UIPasteboard.changedNotification, object: nil)
+    public init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(BDTestsEnv.runSeederAgain),
+            name: UIPasteboard.changedNotification,
+            object: nil)
     }
     
-    public func testEnv()->(networkTest:Bool,modelTest:Bool){
+    public func testEnv() -> (networkTest: Bool, modelTest: Bool) {
         
         var isNetworkTest = false
         var isModelTest = false
@@ -28,14 +31,14 @@ public class BDTestsEnv {
         
         if bdTests.isModelTest(){
             isModelTest = true
-            if let model = bdTests.readDatabaseData(){
+            if let model = bdTests.readDatabaseData() {
                 let helpClass = BDTestsHelper()
-                if helpClass.responds(to: Selector(model)){
+                if helpClass.responds(to: Selector(model)) {
                     helpClass.perform(Selector(model))
                 }
             }
         }
-        return (isNetworkTest,isModelTest)
+        return (isNetworkTest, isModelTest)
     }
     
     @objc func runSeederAgain(){
