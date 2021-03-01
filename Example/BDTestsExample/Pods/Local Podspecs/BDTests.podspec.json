@@ -1,6 +1,6 @@
 {
   "name": "BDTests",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "summary": "A Swift UITesting framework. Intended to simplify stubbing UITests",
   "description": "A Swift UITesting framework. Intended to simplify stubbing UITests.",
   "homepage": "https://github.com/bytedissident/BDTests",
@@ -12,11 +12,13 @@
     "bytedissident": "dbronston@me.com"
   },
   "source": {
-    "git": "https://github.com/bytedissident/BDTests.git",
-    "tag": "0.0.13"
+    "git": "https://github.com/aahibalau/BDTests",
+    "branch": "feature/version_0.0.14",
+    "tag": "0.0.14"
   },
+  "swift_versions": "5.0",
   "platforms": {
-    "ios": "9.0"
+    "ios": "12.0"
   },
   "source_files": "BDTests/Classes/**/*",
   "dependencies": {
@@ -26,5 +28,6 @@
     "OHHTTPStubs/Swift": [
 
     ]
-  }
+  },
+  "swift_version": "5.0"
 }

@@ -1029,6 +1029,39 @@
 			};
 			name = Debug;
 		};
+		3129F43EE1D25A0E94BADB40AE06565E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC25A72253DB1D8258EC1304CD5F9682 /* BDTests.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BDTests/BDTests-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BDTests/BDTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BDTests/BDTests.modulemap";
+				PRODUCT_MODULE_NAME = BDTests;
+				PRODUCT_NAME = BDTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		54B321601647AA5B4EDEE154FD2BF7C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 87292D2E196B312FE221826E43E63160 /* OHHTTPStubs.release.xcconfig */;
@@ -1156,11 +1189,12 @@
 			};
 			name = Release;
 		};
-		8E88FDE10F6AF71512D19F271496C389 /* Release */ = {
+		858BED1A19175156A3555B4B23EB8D48 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC25A72253DB1D8258EC1304CD5F9682 /* BDTests.release.xcconfig */;
+			baseConfigurationReference = 21FBDA3ED40DE1F3EEF30B3BFE348930 /* BDTests.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1172,7 +1206,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/BDTests/BDTests-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BDTests/BDTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/BDTests/BDTests.modulemap";
 				PRODUCT_MODULE_NAME = BDTests;
@@ -1182,11 +1216,10 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		BF4FA865C0F2A9F711BEFF49E7BAA0D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1322,37 +1355,6 @@
 			};
 			name = Release;
 		};
-		F312BB3313C0481756FADE9FC1AE2D26 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21FBDA3ED40DE1F3EEF30B3BFE348930 /* BDTests.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BDTests/BDTests-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BDTests/BDTests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BDTests/BDTests.modulemap";
-				PRODUCT_MODULE_NAME = BDTests;
-				PRODUCT_NAME = BDTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1368,8 +1370,8 @@
 		4B89C594D3605D4CA35A5D101628B252 /* Build configuration list for PBXNativeTarget "BDTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F312BB3313C0481756FADE9FC1AE2D26 /* Debug */,
-				8E88FDE10F6AF71512D19F271496C389 /* Release */,
+				858BED1A19175156A3555B4B23EB8D48 /* Debug */,
+				3129F43EE1D25A0E94BADB40AE06565E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
