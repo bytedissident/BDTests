@@ -7,7 +7,7 @@ target 'BDTestsExample' do
 
   # Pods for TestMe
   # pod 'BDTestsUI', :git => 'https://github.com/bytedissident/BDTestsUI'
-  pod 'BDTests', :git => 'https://github.com/aahibalau/BDTests'
+  pod 'BDTests', :git => 'https://github.com/bytedissident/BDTests'
   pod 'Alamofire'
 
 
@@ -15,7 +15,7 @@ target 'BDTestsExample' do
   target 'BDTestsExampleUITests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'BDTests', :git => 'https://github.com/aahibalau/BDTests'
+    pod 'BDTests', :git => 'https://github.com/bytedissident/BDTests'
     #pod 'BDTestsUI', :git => 'https://github.com/bytedissident/BDTestsUI'
   end
 
