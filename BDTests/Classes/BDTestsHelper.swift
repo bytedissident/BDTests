@@ -9,20 +9,17 @@
 import Foundation
 import UIKit
 
-public class BDTestsHelper:NSObject {
+public class BDTestsHelper: NSObject {
     
     let bdTestsEnv = BDTestsEnv()
-    public override init(){}
+    public override init() {}
 
-   
-    
-    
     /**
      Add a reset button to the UI so we can reset the next test in the sequence
      
      - parameter label:String
     */
-    public func addResetButton(label:String){
+    public func addResetButton(label: String) {
     
         let resetButton = UIButton()
         resetButton.tag = 99999
@@ -34,6 +31,6 @@ public class BDTestsHelper:NSObject {
         }*/
         let window = UIApplication.shared.windows.first!
         window.addSubview(resetButton)
-        window.bringSubview(toFront: resetButton)
+        window.bringSubviewToFront(resetButton)
     }
 }

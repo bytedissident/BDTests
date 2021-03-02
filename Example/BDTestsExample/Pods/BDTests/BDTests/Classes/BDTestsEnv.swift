@@ -11,7 +11,10 @@ import Foundation
 
 public class BDTestsEnv {
     
-    public init(){}
+    public init(){
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(BDTestsEnv.runSeederAgain), name: UIPasteboard.changedNotification, object: nil)
+    }
     
     public func testEnv()->(networkTest:Bool,modelTest:Bool){
         
@@ -20,6 +23,7 @@ public class BDTestsEnv {
         let bdTests = BDTests(enviornmentName: nil)
         if bdTests.isTest() {
             isNetworkTest = true
+            _ = bdTests.runTests()
         }
         
         if bdTests.isModelTest(){
@@ -32,5 +36,9 @@ public class BDTestsEnv {
             }
         }
         return (isNetworkTest,isModelTest)
+    }
+    
+    @objc func runSeederAgain(){
+        _ = testEnv()
     }
 }

@@ -1,42 +1,48 @@
 PODS:
-  - Alamofire (4.3.0)
-  - BDTests (0.0.1):
+  - Alamofire (5.4.1)
+  - BDTests (0.0.14):
     - OHHTTPStubs
     - OHHTTPStubs/Swift
-  - OHHTTPStubs (5.2.3):
-    - OHHTTPStubs/Default (= 5.2.3)
-  - OHHTTPStubs/Core (5.2.3)
-  - OHHTTPStubs/Default (5.2.3):
+  - OHHTTPStubs (9.1.0):
+    - OHHTTPStubs/Default (= 9.1.0)
+  - OHHTTPStubs/Core (9.1.0)
+  - OHHTTPStubs/Default (9.1.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.3):
+  - OHHTTPStubs/JSON (9.1.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.3):
+  - OHHTTPStubs/NSURLSession (9.1.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.3)
-  - OHHTTPStubs/Swift (5.2.3):
-    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (9.1.0)
+  - OHHTTPStubs/Swift (9.1.0):
+    - OHHTTPStubs/Default
 
 DEPENDENCIES:
   - Alamofire
-  - BDTests (from `https://github.com/bytedissident/BDTests`)
+  - BDTests (from `https://github.com/aahibalau/BDTests`, branch `feature/version_0.0.14`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - OHHTTPStubs
 
 EXTERNAL SOURCES:
   BDTests:
-    :git: https://github.com/bytedissident/BDTests
+    :branch: feature/version_0.0.14
+    :git: https://github.com/aahibalau/BDTests
 
 CHECKOUT OPTIONS:
   BDTests:
-    :commit: c54f1b6f196ffb00fae3918391034f6339b03fb0
-    :git: https://github.com/bytedissident/BDTests
+    :commit: d30fea70d8b6c58d51332c0c74a3b9e49f72ca21
+    :git: https://github.com/aahibalau/BDTests
 
 SPEC CHECKSUMS:
-  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
-  BDTests: b9710fea9cfcb28867b65f88a7228dc94dcc8697
-  OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  BDTests: 67dc655872654b86d7370e31b200b31995dde34c
+  OHHTTPStubs: 90eac6d8f2c18317baeca36698523dc67c513831
 
-PODFILE CHECKSUM: c1ffeecd4ce4dd17c2c1e76957af09faaa36ec04
+PODFILE CHECKSUM: 3bb18529f8824a1854bb83da7fe3df02fe43893f
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.10.1

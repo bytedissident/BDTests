@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import BDTestsUnitTests
 
 class BDTestsTests: XCTestCase {
     
